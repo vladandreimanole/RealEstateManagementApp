@@ -9,74 +9,134 @@ public class DataService : IDataService
         _context = context;
     }
 
-    public Task CreateContract(Contract contract)
+    public async Task<Contract> CreateContract(Contract contract)
     {
-        throw new NotImplementedException();
+        _context.Contracts.Add(contract);
+        await _context.SaveChangesAsync();
+        return contract;
     }
 
-    public Task CreateLandLord(Landlord landlord)
+    public async Task<Landlord> CreateLandLord(Landlord landlord)
     {
-        throw new NotImplementedException();
+        _context.Landlords.Add(landlord);
+        await _context.SaveChangesAsync();
+        return landlord;
     }
 
-    public Task CreateProperty(Property property)
+    public async Task<Property> CreateProperty(Property property)
     {
-        throw new NotImplementedException();
+        _context.Properties.Add(property);
+        await _context.SaveChangesAsync();
+        return property;
     }
 
-    public Task CreateTenant(Tenant tenant)
+    public async Task<Tenant> CreateTenant(Tenant tenant)
     {
-        throw new NotImplementedException();
+        _context.Tenants.Add(tenant);
+        await _context.SaveChangesAsync();
+        return tenant;
     }
 
-    public Task CreateUserAccount(User user)
+    public async Task<User> CreateUserAccount(User user)
     {
-        throw new NotImplementedException();
+        _context.Users.Add(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
 
-    public Task DeleteContract(Contract contract)
+    public async Task<Contract> DeleteContract(Contract contract)
     {
-        throw new NotImplementedException();
+        _context.Contracts.Remove(contract);
+        await _context.SaveChangesAsync();
+        return contract;
     }
 
-    public Task DeleteLandLord(Landlord landlord)
+    public async Task<Landlord> DeleteLandLord(Landlord landlord)
     {
-        throw new NotImplementedException();
+        _context.Landlords.Remove(landlord);
+        await _context.SaveChangesAsync();
+        return landlord;
     }
 
-    public Task DeleteProperty(Property property)
+    public async Task<Property> DeleteProperty(Property property)
     {
-        throw new NotImplementedException();
+        _context.Properties.Remove(property);
+        await _context.SaveChangesAsync();
+        return property;
     }
 
-    public Task DeleteTenant(Tenant tenant)
+    public async Task<Tenant> DeleteTenant(Tenant tenant)
     {
-        throw new NotImplementedException();
+        _context.Tenants.Remove(tenant);
+        await _context.SaveChangesAsync();
+        return tenant;
     }
 
-    public Task DeleteUserAccount(User user)
+    public async Task<User> DeleteUserAccount(User user)
     {
-        throw new NotImplementedException();
+        _context.Users.Remove(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
 
-    public Task UpdateLandLord(Landlord landlord)
+    public async Task<IEnumerable<Contract>> GetContracts()
     {
-        throw new NotImplementedException();
+        return await _context.Contracts.ToListAsync();
     }
 
-    public Task UpdateProperty(Property property)
+    public async Task<IEnumerable<Landlord>> GetLandlords()
     {
-        throw new NotImplementedException();
+        return await _context.Landlords.ToListAsync();
     }
 
-    public Task UpdateTenant(Tenant tenant)
+    public async Task<IEnumerable<Property>> GetProperties()
     {
-        throw new NotImplementedException();
+        return await _context.Properties.ToListAsync();
     }
 
-    public Task UpdateUserAccount(User user)
+    public async Task<IEnumerable<Tenant>> GetTenants()
     {
-        throw new NotImplementedException();
+        return await _context.Tenants.ToListAsync();
+    }
+
+    public async Task<IEnumerable<User>> GetUsers()
+    {
+        return await _context.Users.ToListAsync();
+    }
+
+    public async Task<Contract> UpdateContract(Contract contract)
+    {
+        _context.Contracts.Update(contract);
+        await _context.SaveChangesAsync();
+        return contract;
+    }
+
+    public async Task<Landlord> UpdateLandLord(Landlord landlord)
+    {
+        _context.Landlords.Update(landlord);
+        await _context.SaveChangesAsync();
+        return landlord;
+    }
+
+    public async Task<Property> UpdateProperty(Property property)
+    {
+        _context.Properties.Update(property);
+        await _context.SaveChangesAsync();
+        return property;
+    }
+
+    public async Task<Tenant> UpdateTenant(Tenant tenant)
+    {
+        _context.Tenants.Update(tenant);
+        await _context.SaveChangesAsync();
+        return tenant;
+    }
+
+    public async Task<User> UpdateUserAccount(User user)
+    {
+        _context.Users.Update(user);
+        await _context.SaveChangesAsync();
+        return user;
     }
 }
 

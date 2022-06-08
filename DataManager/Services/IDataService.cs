@@ -2,34 +2,45 @@
 
     public interface IDataService
     {
+    Task<IEnumerable<User>> GetUsers();
 
-    Task CreateUserAccount(User user);
+    Task<User> CreateUserAccount(User user);
 
-    Task DeleteUserAccount(User user);
+    Task<User> DeleteUserAccount(User user);
 
-    Task UpdateUserAccount(User user);
+    Task<User> UpdateUserAccount(User user);
 
-    Task CreateTenant(Tenant tenant);
+    Task<Tenant> CreateTenant(Tenant tenant);
 
-    Task DeleteTenant(Tenant tenant);   
+    Task<Tenant> DeleteTenant(Tenant tenant);   
 
-    Task UpdateTenant(Tenant tenant);
+    Task<Tenant> UpdateTenant(Tenant tenant);
 
-    Task CreateLandLord(Landlord landlord);
+    Task<IEnumerable<Tenant>> GetTenants();
 
-    Task DeleteLandLord(Landlord landlord);
+    Task<Landlord> CreateLandLord(Landlord landlord);
 
-    Task UpdateLandLord(Landlord landlord);
+    Task<Landlord> DeleteLandLord(Landlord landlord);
 
-    Task CreateProperty(Property property);
+    Task<Landlord> UpdateLandLord(Landlord landlord);
 
-    Task DeleteProperty(Property property);
+    Task<IEnumerable<Landlord>> GetLandlords();
 
-    Task UpdateProperty(Property property);
+    Task<Property> CreateProperty(Property property);
 
-    Task CreateContract(Contract contract);
+    Task<Property> DeleteProperty(Property property);
 
-    Task DeleteContract(Contract contract);
+    Task<Property> UpdateProperty(Property property);
+
+    Task<IEnumerable<Property>> GetProperties();
+
+    Task<Contract> CreateContract(Contract contract);
+
+    Task<Contract> DeleteContract(Contract contract);
+
+    Task<Contract> UpdateContract(Contract contract);
+
+    Task<IEnumerable<Contract>> GetContracts();
         
     }
 
