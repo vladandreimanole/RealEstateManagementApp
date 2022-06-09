@@ -6,7 +6,7 @@
 
     Task<User> CreateUserAccount(User user);
 
-    Task<User> DeleteUserAccount(User user);
+    Task<User> DeleteUserAccount(int userId);
 
     Task<User> UpdateUserAccount(User user);
 
@@ -20,7 +20,7 @@
 
     Task<Landlord> CreateLandLord(Landlord landlord);
 
-    Task<Landlord> DeleteLandLord(Landlord landlord);
+    Task<Landlord> DeleteLandLord(int landlordId);
 
     Task<Landlord> UpdateLandLord(Landlord landlord);
 
@@ -28,7 +28,7 @@
 
     Task<Property> CreateProperty(Property property);
 
-    Task<Property> DeleteProperty(Property property);
+    Task<Property> DeleteProperty(int propertyId);
 
     Task<Property> UpdateProperty(Property property);
 
@@ -36,7 +36,7 @@
 
     Task<Contract> CreateContract(Contract contract);
 
-    Task<Contract> DeleteContract(Contract contract);
+    Task<Contract> DeleteContract(int contractId);
 
     Task<Contract> UpdateContract(Contract contract);
 

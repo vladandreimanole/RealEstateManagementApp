@@ -44,43 +44,55 @@ public class DataService : IDataService
         return user;
     }
 
-    public async Task<Contract> DeleteContract(Contract contract)
+    public async Task<Contract> DeleteContract(int contractId)
     {
-        _context.Contracts.Remove(contract);
+        var contractToDelete = _context.Contracts.Where(x => x.ContractId == contractId).FirstOrDefault();
+        if (contractToDelete is null)
+            return null;
+        _context.Contracts.Remove(contractToDelete);
         await _context.SaveChangesAsync();
-        return contract;
+        return contractToDelete;
     }
 
-    public async Task<Landlord> DeleteLandLord(Landlord landlord)
+    public async Task<Landlord> DeleteLandLord(int landlordId)
     {
-        _context.Landlords.Remove(landlord);
+        var landlordToDelete = _context.Landlords.Where(x => x.LandlordId == landlordId).FirstOrDefault();
+        if (landlordToDelete is null)
+            return null;
+        _context.Landlords.Remove(landlordToDelete);
         await _context.SaveChangesAsync();
-        return landlord;
+        return landlordToDelete;
     }
 
-    public async Task<Property> DeleteProperty(Property property)
+    public async Task<Property> DeleteProperty(int propertyId)
     {
-        _context.Properties.Remove(property);
+        var propertyToDelete = _context.Properties.Where(x=> x.PropertyId == propertyId).FirstOrDefault();
+        if (propertyToDelete is null)
+            return null;
+        _context.Properties.Remove(propertyToDelete);
         await _context.SaveChangesAsync();
-        return property;
+        return propertyToDelete;
     }
 
     public async Task<Tenant> DeleteTenant(int tenantId)
     {
         var tenantToDelete = _context.Tenants.Where(t=>t.TenantId == tenantId).FirstOrDefault();
-        if(tenantToDelete is null)
-            return new Tenant();
+        if (tenantToDelete is null)
+            return null;
 
         _context.Tenants.Remove(tenantToDelete);
         await _context.SaveChangesAsync();
         return tenantToDelete;
     }
 
-    public async Task<User> DeleteUserAccount(User user)
+    public async Task<User> DeleteUserAccount(int userId)
     {
-        _context.Users.Remove(user);
+        var userToDelete = _context.Users.Where(x => x.UserId == userId).FirstOrDefault();
+        if (userToDelete is null)
+            return null;
+        _context.Users.Remove(userToDelete);
         await _context.SaveChangesAsync();
-        return user;
+        return userToDelete;
     }
 
     public async Task<List<Contract>> GetContracts()
