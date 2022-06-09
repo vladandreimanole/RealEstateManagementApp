@@ -1,12 +1,17 @@
 
-using DataManager.Models;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddControllers();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "RealEstateApi", Version = "v1" });
+});
+builder.Services.AddCors();
 builder.Services.AddDbContext<RealEstate_AppContext>();
+builder.Services.AddTransient<IDataService, DataService>();
 var app = builder.Build();
 
 //migrate any database changes on startup
@@ -25,11 +30,13 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseCors(c => c.SetIsOriginAllowed(origin => true).AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+
+app.UseSwagger();
+app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TargetManagementAPI v1"));
 
 app.UseRouting();
 
 app.UseAuthorization();
-
-app.MapRazorPages();
 
 app.Run();
