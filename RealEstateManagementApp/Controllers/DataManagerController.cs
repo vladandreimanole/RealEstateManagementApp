@@ -43,5 +43,40 @@ public class DataManagerController : Controller
     {
         return await _dataService.GetTenants();
     }
+
+    [HttpDelete]
+
+    public async Task<Tenant> DeleteTenant(int tenantId)
+    {
+        return await _dataService.DeleteTenant(tenantId);
+    }
+
+    [HttpDelete]
+
+    public async Task<Property> DeleteProperty(int propertyId)
+    {
+        return await _dataService.DeleteProperty(propertyId);
+    }
+
+    [HttpDelete]
+
+    public async Task<User> DeleteUserAccount(int userId)
+    {
+        return await _dataService.DeleteUserAccount(userId);
+    }
+
+    [HttpDelete]
+
+    public async Task<Landlord> DeleteLandLor(int landLorId)
+    {
+        return await _dataService.DeleteLandLord(landLorId);
+    }
+
+    [HttpDelete]
+
+    public async Task<Contract> DeleteContract(int contractId)
+    {
+        return await _dataService.DeleteContract(contractId);
+    }
 }
 
