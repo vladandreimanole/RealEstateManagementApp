@@ -7,10 +7,11 @@ namespace RealEstateManagementApp.Controllers;
 public class DataManagerController : Controller
 {
     private readonly IDataService _dataService;
-
-    public DataManagerController(IDataService dataService)
+    private readonly ILogger<DataManagerController> _logger;
+    public DataManagerController(IDataService dataService, ILogger<DataManagerController> logger)
     {
         _dataService = dataService;
+        _logger = logger;
     }
 
     [HttpGet]
