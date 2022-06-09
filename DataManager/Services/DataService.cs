@@ -79,27 +79,27 @@ public class DataService : IDataService
         return user;
     }
 
-    public async Task<IEnumerable<Contract>> GetContracts()
+    public async Task<List<Contract>> GetContracts()
     {
         return await _context.Contracts.ToListAsync();
     }
 
-    public async Task<IEnumerable<Landlord>> GetLandlords()
+    public async Task<List<Landlord>> GetLandlords()
     {
         return await _context.Landlords.ToListAsync();
     }
 
-    public async Task<IEnumerable<Property>> GetProperties()
+    public async Task<List<Property>> GetProperties()
     {
         return await _context.Properties.ToListAsync();
     }
 
-    public async Task<IEnumerable<Tenant>> GetTenants()
+    public async Task<List<Tenant>> GetTenants()
     {
         return await _context.Tenants.ToListAsync();
     }
 
-    public async Task<IEnumerable<User>> GetUsers()
+    public async Task<List<User>> GetUsers()
     {
         return await _context.Users.ToListAsync();
     }

@@ -2,7 +2,7 @@
 
     public interface IDataService
     {
-    Task<IEnumerable<User>> GetUsers();
+    Task<List<User>> GetUsers();
 
     Task<User> CreateUserAccount(User user);
 
@@ -16,7 +16,7 @@
 
     Task<Tenant> UpdateTenant(Tenant tenant);
 
-    Task<IEnumerable<Tenant>> GetTenants();
+    Task<List<Tenant>> GetTenants();
 
     Task<Landlord> CreateLandLord(Landlord landlord);
 
@@ -24,7 +24,7 @@
 
     Task<Landlord> UpdateLandLord(Landlord landlord);
 
-    Task<IEnumerable<Landlord>> GetLandlords();
+    Task<List<Landlord>> GetLandlords();
 
     Task<Property> CreateProperty(Property property);
 
@@ -32,7 +32,7 @@
 
     Task<Property> UpdateProperty(Property property);
 
-    Task<IEnumerable<Property>> GetProperties();
+    Task<List<Property>> GetProperties();
 
     Task<Contract> CreateContract(Contract contract);
 
@@ -40,7 +40,7 @@
 
     Task<Contract> UpdateContract(Contract contract);
 
-    Task<IEnumerable<Contract>> GetContracts();
+    Task<List<Contract>> GetContracts();
         
     }
 

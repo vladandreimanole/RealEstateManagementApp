@@ -16,9 +16,32 @@ public class DataManagerController : Controller
 
     [HttpGet]
 
-    public void Test()
+    public async Task<List<Contract>> GetAvailableContracts()
     {
-        Console.WriteLine("");
+        var result = await _dataService.GetContracts();
+        return result.ToList();
+    }
+
+    [HttpGet]
+
+    public async Task<List<Property>> GetProperties()
+    {
+        
+        return await _dataService.GetProperties();
+    }
+
+    [HttpGet]
+
+    public async Task<List<Landlord>> GetLandlords()
+    {
+        return await _dataService.GetLandlords();
+    }
+
+    [HttpGet]
+
+    public async Task<List<Tenant>> GetTenants()
+    {
+        return await _dataService.GetTenants();
     }
 }
 
