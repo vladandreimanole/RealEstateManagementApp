@@ -1,4 +1,5 @@
 
+using Microsoft.AspNetCore.Builder;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,4 +40,8 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.Run();
+app.UseEndpoints(endpoints =>
+  {
+      endpoints.MapControllers();
+  });
+  app.Run();

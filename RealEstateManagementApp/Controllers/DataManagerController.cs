@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace RealEstateManagementApp.Controllers;
 
@@ -13,13 +14,12 @@ public class DataManagerController : Controller
         _dataService = dataService;
         _logger = logger;
     }
-
+    [AllowAnonymous]
     [HttpGet]
 
     public async Task<List<Contract>> GetAvailableContracts()
     {
-        var result = await _dataService.GetContracts();
-        return result.ToList();
+        return await _dataService.GetContracts();
     }
 
     [HttpGet]

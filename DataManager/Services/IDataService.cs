@@ -12,7 +12,7 @@
 
     Task<Tenant> CreateTenant(Tenant tenant);
 
-    Task<Tenant> DeleteTenant(Tenant tenant);   
+    Task<Tenant> DeleteTenant(int tenantId);   
 
     Task<Tenant> UpdateTenant(Tenant tenant);
 

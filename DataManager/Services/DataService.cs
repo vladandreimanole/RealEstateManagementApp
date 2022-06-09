@@ -65,11 +65,15 @@ public class DataService : IDataService
         return property;
     }
 
-    public async Task<Tenant> DeleteTenant(Tenant tenant)
+    public async Task<Tenant> DeleteTenant(int tenantId)
     {
-        _context.Tenants.Remove(tenant);
+        var tenantToDelete = _context.Tenants.Where(t=>t.TenantId == tenantId).FirstOrDefault();
+        if(tenantToDelete is null)
+            return new Tenant();
+
+        _context.Tenants.Remove(tenantToDelete);
         await _context.SaveChangesAsync();
-        return tenant;
+        return tenantToDelete;
     }
 
     public async Task<User> DeleteUserAccount(User user)
