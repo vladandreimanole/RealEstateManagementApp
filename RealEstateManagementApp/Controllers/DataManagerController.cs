@@ -14,15 +14,15 @@ public class DataManagerController : Controller
         _dataService = dataService;
         _logger = logger;
     }
-    [AllowAnonymous]
-    [HttpGet]
+
+    [HttpGet, Authorize]
 
     public async Task<List<Contract>> GetAvailableContracts()
     {
         return await _dataService.GetContracts();
     }
 
-    [HttpGet]
+    [HttpGet,Authorize]
 
     public async Task<List<Property>> GetProperties()
     {
@@ -30,49 +30,49 @@ public class DataManagerController : Controller
         return await _dataService.GetProperties();
     }
 
-    [HttpGet]
+    [HttpGet, Authorize]
 
     public async Task<List<Landlord>> GetLandlords()
     {
         return await _dataService.GetLandlords();
     }
 
-    [HttpGet]
+    [HttpGet, Authorize]
 
     public async Task<List<Tenant>> GetTenants()
     {
         return await _dataService.GetTenants();
     }
 
-    [HttpDelete]
+    [HttpDelete, Authorize]
 
     public async Task<Tenant> DeleteTenant(int tenantId)
     {
         return await _dataService.DeleteTenant(tenantId);
     }
 
-    [HttpDelete]
+    [HttpDelete, Authorize]
 
     public async Task<Property> DeleteProperty(int propertyId)
     {
         return await _dataService.DeleteProperty(propertyId);
     }
 
-    [HttpDelete]
+    [HttpDelete,Authorize]
 
     public async Task<User> DeleteUserAccount(int userId)
     {
         return await _dataService.DeleteUserAccount(userId);
     }
 
-    [HttpDelete]
+    [HttpDelete, Authorize]
 
     public async Task<Landlord> DeleteLandLor(int landLorId)
     {
         return await _dataService.DeleteLandLord(landLorId);
     }
 
-    [HttpDelete]
+    [HttpDelete,Authorize]
 
     public async Task<Contract> DeleteContract(int contractId)
     {
