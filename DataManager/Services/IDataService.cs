@@ -41,6 +41,9 @@
     Task<Contract> UpdateContract(Contract contract);
 
     Task<List<Contract>> GetContracts();
-        
+
+    Task<User> GetUserByEmail(string email);
+
+
     }
 

@@ -120,6 +120,11 @@ public class DataService : IDataService
         return await _context.Users.ToListAsync();
     }
 
+    public async Task<User> GetUserByEmail(string email)
+    {
+        return await _context.Users.Where(u => u.Email == email).FirstOrDefaultAsync();
+    }
+
     public async Task<Contract> UpdateContract(Contract contract)
     {
         _context.Contracts.Update(contract);

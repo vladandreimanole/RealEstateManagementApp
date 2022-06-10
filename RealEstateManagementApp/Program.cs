@@ -1,11 +1,4 @@
 
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc.Formatters;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-using System.Text;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthentication(opt => {
@@ -38,6 +31,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddCors();
 builder.Services.AddDbContext<RealEstate_AppContext>();
 builder.Services.AddTransient<IDataService, DataService>();
+builder.Services.Configure<AuthentificationOptionsMonitor>(builder.Configuration.GetSection(nameof(AuthentificationOptionsMonitor)));
+
 var app = builder.Build();
 
 //migrate any database changes on startup
