@@ -16,20 +16,20 @@ public class AuthController : ControllerBase
         _optionsMonitor = optionsMonitor;
     }
     [HttpPost("login")]
-    public IActionResult Login(string email, string password)
+    public IActionResult Login(AuthenticateRequest model)
     {
 
-        if (String.IsNullOrEmpty(email) || password is null)
+        if (String.IsNullOrEmpty(model.email) || model.password is null)
         {
             return BadRequest("Invalid client request");
         }
-        var realUserFromDb = _dataService.GetUserByEmail(email).ConfigureAwait(false).GetAwaiter().GetResult();
+        var realUserFromDb = _dataService.GetUserByEmail(model.email).ConfigureAwait(false).GetAwaiter().GetResult();
 
         if (realUserFromDb is null)
         {
             return BadRequest("Account does not exist");
         }
-        if (String.Equals(email, realUserFromDb.Email) && String.Equals(email, realUserFromDb.Email))
+        if (String.Equals(model.email, realUserFromDb.Email) && String.Equals(model.password, realUserFromDb.Password))
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_optionsMonitor.CurrentValue.JwtToken));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
@@ -47,4 +47,3 @@ public class AuthController : ControllerBase
         return Unauthorized();
     }
 }
-
