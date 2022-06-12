@@ -3,7 +3,7 @@
       <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
         <mat-tab label="List a property">
             <mat-card-content>
-              <form #propertyForm="ngForm" (ngSubmit)="login(propertyForm)">
+              <form #propertyForm="ngForm" (ngSubmit)="createProperty(propertyForm)">
                 <mat-form-field>
                   <input
                     matInput
@@ -47,7 +47,7 @@
                 <button
                   mat-raised-button
                   color="primary"
-                  class="login-button" (click)="login(propertyForm)">
+                  class="login-button" (click)="createProperty(propertyForm)">
                  Listeaza
                 </button>
               </form>

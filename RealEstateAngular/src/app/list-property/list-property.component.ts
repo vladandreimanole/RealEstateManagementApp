@@ -11,7 +11,7 @@ import { PropertyModel } from '../interfaces/property.model';
 export class ListPropertyComponent implements OnInit {
 
     public path: Object = {
-      saveUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save',
+      saveUrl: 'C:\\',
       removeUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove'
   };
   
@@ -23,7 +23,7 @@ export class ListPropertyComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login = ( form: NgForm) => {
+  createProperty = ( form: NgForm) => {
 
   }
   fileName = '';

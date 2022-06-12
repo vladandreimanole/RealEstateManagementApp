@@ -1,4 +1,4 @@
-﻿
+﻿using System.Web;
 namespace RealEstateManagementApp.Controllers;
 
 [Route("api/[controller]")]
@@ -45,5 +45,44 @@ public class AuthController : ControllerBase
             return Ok(new AuthenticatedResponse { Token = tokenString, Email = realUserFromDb.Email});
         }
         return Unauthorized();
+    }
+
+
+    [AcceptVerbs("Post")]
+    public void Save()
+    {
+        try
+        {
+            if (HttpContext.Request.Files.AllKeys.Length > 0)
+            {
+                var httpPostedFile = System.Web.HttpContext.Request.Files["UploadFiles"];
+
+                if (httpPostedFile != null)
+                {
+                    byte[] fileBytes;
+                    using (BinaryReader br = new BinaryReader(httpPostedFile.InputStream))
+                    {
+                        fileBytes = br.ReadBytes((int)httpPostedFile.InputStream.Length);
+                        // bytes will be stored in variable fileBytes
+                    }
+                    HttpResponse Response = System.Web.HttpContext.Current.Response;
+                    Response.Clear();
+                    Response.ContentType = "application/json; charset=utf-8";
+                    Response.StatusCode = 200;
+                    Response.Status = "200 Success";
+                    Response.End();
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            HttpResponse Response = System.Web.HttpContext.Current.Response;
+            Response.Clear();
+            Response.ContentType = "application/json; charset=utf-8";
+            Response.StatusCode = 204;
+            Response.Status = "204 No Content";
+            Response.StatusDescription = e.Message;
+            Response.End();
+        }
     }
 }

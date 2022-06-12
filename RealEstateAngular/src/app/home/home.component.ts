@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
   public path: Object = {
-    saveUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Save',
+    saveUrl: 'C:\\',
     removeUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove'
 };
 
