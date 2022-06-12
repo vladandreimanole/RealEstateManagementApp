@@ -7,7 +7,8 @@ namespace DataManager.Models
     {
         public int PropertyId { get; set; }
         public string? PropertyName { get; set; }
-        public string? PropertyLocation { get; set; }
+        public string? City { get; set; }
+        public string? Address { get; set; }
         public long? Value { get; set; }
         public int? TenantId { get; set; }
         public int? LandlordId { get; set; }

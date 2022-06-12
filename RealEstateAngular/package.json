@@ -24,6 +24,7 @@
     "@schematics/angular": "^14.0.1",
     "@syncfusion/ej2-angular-buttons": "^20.1.55",
     "@syncfusion/ej2-angular-grids": "^20.1.59",
+    "@syncfusion/ej2-angular-inputs": "^20.1.59",
     "@syncfusion/ej2-base": "^20.1.57",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

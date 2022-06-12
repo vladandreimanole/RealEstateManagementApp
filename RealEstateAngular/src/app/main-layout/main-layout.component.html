@@ -8,7 +8,7 @@
       </button>
   
       <a class="navbar-brand" [routerLink]="['/']" matTooltip="Home">
-        <img src="/assets/images/logo.png" alt="Girl in a jacket" width="auto" height="80">
+        <img src="/assets/images/logo.png" width="auto" height="80">
       </a>
   
       <span class="navbar-spacer"></span>
@@ -63,7 +63,14 @@
             <mat-icon mat-list-icon>
               dashboard
             </mat-icon>
-            <p mat-line> Dashboard </p>
+            <p mat-line> Properties </p>
+          </a>
+
+          <a mat-list-item [routerLink]="['/list-property']" routerLinkActive="active">
+            <mat-icon mat-list-icon>
+              dashboard
+            </mat-icon>
+            <p mat-line> List a property </p>
           </a>
 
           <mat-divider></mat-divider>

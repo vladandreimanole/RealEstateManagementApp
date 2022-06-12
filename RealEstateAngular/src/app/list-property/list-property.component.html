@@ -1,0 +1,59 @@
+<div class="login-page">
+    <mat-card class="mat-elevation-z12">
+      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+        <mat-tab label="List a property">
+            <mat-card-content>
+              <form #propertyForm="ngForm" (ngSubmit)="login(propertyForm)">
+                <mat-form-field>
+                  <input
+                    matInput
+                    placeholder="Descriere"
+                    required
+                    name="description"
+                    [(ngModel)]="property.PropertyName">
+                </mat-form-field>
+                <mat-form-field>
+                    <input
+                      matInput
+                      placeholder="Oras"
+                      required
+                      name="city"
+                      [(ngModel)]="property.City">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input
+                      matInput
+                      placeholder="Adresa"
+                      required
+                      name="address"
+                      [(ngModel)]="property.Address">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input
+                      matInput
+                      placeholder="Pret listare"
+                      required
+                      name="value"
+                      [(ngModel)]="property.Value">
+                  </mat-form-field>
+                <div class="control-section" style="width: 80%;margin: auto;">
+                    <div class="col-lg-9">
+                        <div class="control_wrapper">
+                            <ejs-uploader #defaultupload id='defaultfileupload' [asyncSettings]='path' multiple=true [dropArea]='dropElement'></ejs-uploader>
+                        </div>
+                    </div>
+                    
+                  </div>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="login-button" (click)="login(propertyForm)">
+                 Listeaza
+                </button>
+              </form>
+            </mat-card-content>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card>
+  </div>
+  

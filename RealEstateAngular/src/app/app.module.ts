@@ -13,6 +13,9 @@ import { SwitchModule } from '@syncfusion/ej2-angular-buttons';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
 import { MaterialModule } from './material/material.module';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { ListPropertyComponent } from './list-property/list-property.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -23,7 +26,8 @@ export function tokenGetter() {
     AppComponent,
     LoginComponent,
     HomeComponent,
-    MainLayoutComponent
+    MainLayoutComponent,
+    ListPropertyComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ export function tokenGetter() {
     }),
     SwitchModule,
     GridModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    UploaderModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

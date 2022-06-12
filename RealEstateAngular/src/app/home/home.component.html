@@ -11,3 +11,11 @@
   <li *ngIf="!isUserAuthenticated()"><a routerLink="/login">Login</a></li>
   <li *ngIf="isUserAuthenticated()"><a class="logout" (click)="logOut()">Log out</a></li>
 </ul>
+<div class="control-section">
+  <div class="col-lg-9">
+      <div class="control_wrapper">
+          <ejs-uploader #defaultupload id='defaultfileupload' [asyncSettings]='path' multiple=true [dropArea]='dropElement'></ejs-uploader>
+      </div>
+  </div>
+  
+</div>
