@@ -42,7 +42,7 @@ public class AuthController : ControllerBase
                 signingCredentials: signinCredentials
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-            return Ok(new AuthenticatedResponse { Token = tokenString });
+            return Ok(new AuthenticatedResponse { Token = tokenString, Email = realUserFromDb.Email});
         }
         return Unauthorized();
     }
