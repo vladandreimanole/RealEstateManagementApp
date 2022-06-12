@@ -16,7 +16,9 @@ export class LoginComponent implements OnInit {
   credentials: LoginModel = {email:'', password:''};
   constructor(private router: Router, private http: HttpClient, private _snackBar: MatSnackBar) { }
   ngOnInit(): void {
-    
+    if (localStorage.getItem("jwt") !== null) {
+      this.router.navigate(['/home']);
+    }
   }
   login = ( form: NgForm) => {
     if (form.valid) {
