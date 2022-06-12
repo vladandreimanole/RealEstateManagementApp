@@ -27,10 +27,10 @@ export class LoginComponent implements OnInit {
         next: (response: AuthenticatedResponse) => {
           const token = response.token;
           const email = response.email;
-          localStorage.setItem("jwt", token); 
+          localStorage.setItem("jwt", token);
           localStorage.setItem("userEmail", email);
-          this.invalidLogin = false; 
-          this.router.navigate(["/"]);
+          this.invalidLogin = false;
+          this.router.navigate(["/home"]);
         },
         error: (err: HttpErrorResponse) => {
           this._snackBar.open('Email sau parola gresite', 'Close', {

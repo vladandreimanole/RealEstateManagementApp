@@ -1,5 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-layout',
@@ -10,7 +12,7 @@ export class MainLayoutComponent implements OnInit {
   private _mobileQueryListener: () => void;
   mobileQuery: MediaQueryList;
   userName: string | null;
-  constructor(private media: MediaMatcher, private changeDetectorRef: ChangeDetectorRef) { 
+  constructor(private media: MediaMatcher, private changeDetectorRef: ChangeDetectorRef, private _snackBar: MatSnackBar, private router: Router) { 
     this.mobileQuery = this.media.matchMedia('(max-width: 1000px)');
         this._mobileQueryListener = () => changeDetectorRef.detectChanges();
         // tslint:disable-next-line: deprecation
@@ -19,6 +21,9 @@ export class MainLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem("jwt") === null) {
+      this.router.navigate(['/login']);
+    }
   }
 
   logOut = () => {
