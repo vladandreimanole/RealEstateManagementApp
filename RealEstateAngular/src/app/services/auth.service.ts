@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 import { AuthenticatedResponse } from '../interfaces/auth-response.model';
 import { LoginModel } from '../interfaces/login';
 
@@ -30,7 +31,7 @@ export class AuthenticationService {
     }
 
     login(credentials: LoginModel) {
-        this.http.post<AuthenticatedResponse>("https://localhost:7243/api/Auth/login", credentials, {
+        this.http.post<AuthenticatedResponse>(environment.urlServices+"Auth/login", credentials, {
             headers: new HttpHeaders({ "Content-Type": "application/json" })
         })
             .subscribe({
