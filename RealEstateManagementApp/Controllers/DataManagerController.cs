@@ -22,13 +22,6 @@ public class DataManagerController : Controller
         return await _dataService.GetContracts();
     }
 
-    [HttpGet,Authorize]
-
-    public async Task<List<Property>> GetProperties()
-    {
-        
-        return await _dataService.GetProperties();
-    }
 
     [HttpGet, Authorize]
 
@@ -44,6 +37,32 @@ public class DataManagerController : Controller
         return await _dataService.GetTenants();
     }
 
+    [HttpGet, Authorize]
+
+    public async Task<List<Property>> GetAllProperies()
+    {
+        return await _dataService.GetProperties();
+    }
+    [HttpPost, Authorize]
+
+    public async Task<Property> GetPropertyById(int properyId)
+    {
+        var props = await _dataService.GetProperties();
+        return props.Where(i=>i.PropertyId == properyId).FirstOrDefault(new Property());
+    }
+    [HttpPost, Authorize]
+
+    public async Task<Property> GetPropertyById([FromBody] Property prop)
+    {
+       
+        return await _dataService.UpdateProperty(prop);
+    }
+    [HttpDelete, Authorize]
+
+    public async Task<Property> DeleteProperty(int propertyId)
+    {
+        return await _dataService.DeleteProperty(propertyId);
+    }
     [HttpDelete, Authorize]
 
     public async Task<Tenant> DeleteTenant(int tenantId)
@@ -51,12 +70,6 @@ public class DataManagerController : Controller
         return await _dataService.DeleteTenant(tenantId);
     }
 
-    [HttpDelete, Authorize]
-
-    public async Task<Property> DeleteProperty(int propertyId)
-    {
-        return await _dataService.DeleteProperty(propertyId);
-    }
 
     [HttpDelete,Authorize]
 
