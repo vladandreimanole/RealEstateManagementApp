@@ -16,6 +16,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { ListPropertyComponent } from './list-property/list-property.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
+import {RouterModule} from '@angular/router';
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -46,7 +47,8 @@ export function tokenGetter() {
     GridModule,
     MaterialModule,
     ReactiveFormsModule,
-    UploaderModule
+    UploaderModule,
+    RouterModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

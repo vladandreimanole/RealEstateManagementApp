@@ -62,7 +62,7 @@
         </mat-tab>
         <mat-tab label="Sign Up">
           <mat-card-content>
-            <form action="">
+            <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
               <mat-form-field>
                 <input
                   matInput
@@ -85,7 +85,8 @@
                   required
                   name="email"
                   ngModel
-                  #email="ngModel">
+                  #email="ngModel"
+                  [(ngModel)]="user.Email">>
                   <mat-error *ngIf="email.invalid">Email is required</mat-error>
                 <mat-icon matSuffix>email</mat-icon>
               </mat-form-field>
@@ -98,7 +99,8 @@
                   minlength="6"
                   name="password"
                   ngModel
-                  #password="ngModel">
+                  #password="ngModel"
+                  [(ngModel)]="user.Password">>
                   <mat-error
                     *ngIf="password.errors && password.errors?.['required']">
                     Password is required
@@ -125,6 +127,15 @@
                     Re-Enter Password is required
                   </mat-error>
                 <mat-icon matSuffix>lock</mat-icon>
+              </mat-form-field>
+              <mat-form-field>
+                <mat-label>You are a...</mat-label>
+                <mat-select [(ngModel)]="selected" required>
+                  <mat-option>--</mat-option>
+                  <mat-option *ngFor="let role of roles" [value]="role">
+                    {{role}}
+                  </mat-option>
+                </mat-select>
               </mat-form-field>
               <button
                 mat-raised-button
