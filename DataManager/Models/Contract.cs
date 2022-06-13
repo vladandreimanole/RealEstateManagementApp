@@ -6,8 +6,8 @@ namespace DataManager.Models
     public partial class Contract
     {
         public int ContractId { get; set; }
-        public int PropertyId { get; set; }
+        public int? PropertyId { get; set; }
 
-        public virtual Property Property { get; set; } = null!;
+        public virtual Property? Property { get; set; }
     }
 }

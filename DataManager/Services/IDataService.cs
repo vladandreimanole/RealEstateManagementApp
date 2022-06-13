@@ -10,22 +10,6 @@
 
     Task<User> UpdateUserAccount(User user);
 
-    Task<Tenant> CreateTenant(Tenant tenant);
-
-    Task<Tenant> DeleteTenant(int tenantId);   
-
-    Task<Tenant> UpdateTenant(Tenant tenant);
-
-    Task<List<Tenant>> GetTenants();
-
-    Task<Landlord> CreateLandLord(Landlord landlord);
-
-    Task<Landlord> DeleteLandLord(int landlordId);
-
-    Task<Landlord> UpdateLandLord(Landlord landlord);
-
-    Task<List<Landlord>> GetLandlords();
-
     Task<Property> CreateProperty(Property property);
 
     Task<Property> DeleteProperty(int propertyId);
