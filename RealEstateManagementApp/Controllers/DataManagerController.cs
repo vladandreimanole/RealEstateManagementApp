@@ -57,6 +57,30 @@ public class DataManagerController : Controller
        
         return await _dataService.UpdateProperty(prop);
     }
+
+    [HttpPost, Authorize]
+
+    public async Task<User> CreateUser([FromBody] User user)
+    {
+
+        return await _dataService.CreateUserAccount(user);
+    }
+
+    [HttpPost, Authorize]
+
+    public async Task<Tenant> CreateTenant([FromBody] Tenant tenant)
+    {
+
+        return await _dataService.CreateTenant(tenant);
+    }
+
+    [HttpPost, Authorize]
+
+    public async Task<Landlord> CreateLandLord([FromBody] Landlord landlord)
+    {
+
+        return await _dataService.CreateLandLord(landlord);
+    }
     [HttpDelete, Authorize]
 
     public async Task<Property> DeleteProperty(int propertyId)
