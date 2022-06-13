@@ -48,14 +48,7 @@ public class DataManagerController : Controller
     public async Task<Property> GetPropertyById(int properyId)
     {
         var props = await _dataService.GetProperties();
-        return props.Where(i=>i.PropertyId == properyId).FirstOrDefault(new Property());
-    }
-    [HttpPost, Authorize]
-
-    public async Task<Property> GetPropertyById([FromBody] Property prop)
-    {
-       
-        return await _dataService.UpdateProperty(prop);
+        return props.Where(i => i.PropertyId == properyId).FirstOrDefault(new Property());
     }
 
     [HttpPost, Authorize]
@@ -95,7 +88,7 @@ public class DataManagerController : Controller
     }
 
 
-    [HttpDelete,Authorize]
+    [HttpDelete, Authorize]
 
     public async Task<User> DeleteUserAccount(int userId)
     {
@@ -109,7 +102,7 @@ public class DataManagerController : Controller
         return await _dataService.DeleteLandLord(landLorId);
     }
 
-    [HttpDelete,Authorize]
+    [HttpDelete, Authorize]
 
     public async Task<Contract> DeleteContract(int contractId)
     {

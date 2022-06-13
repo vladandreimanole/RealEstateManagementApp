@@ -12,19 +12,21 @@ import { PropertyModel } from '../interfaces/property.model';
 export class ListPropertyComponent implements OnInit {
 
     public path: Object = {
-      saveUrl: 'https://localhost:7243/api/Auth',
-      removeUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove'
+      saveUrl: 'https://localhost:7243/api/Auth/Save',
+      removeUrl: 'https://localhost:7243/api/Auth/Remove'
   };
 
   public buttons = { browse: "Alege imagini"};
-  public dropElement: HTMLElement = document.getElementsByClassName('control-fluid')[0] as HTMLElement;
+  public dropElement!: HTMLElement;
   property: PropertyModel;
   constructor(private http: HttpClient) {
     this.property = new PropertyModel();
   }
   ngOnInit(): void {
   }
-
+  ngAfterViewInit(): void {
+    this.dropElement = document.getElementsByClassName('control_wrapper')[0] as HTMLElement;
+}
   createProperty = ( form: NgForm) => {
 
   }

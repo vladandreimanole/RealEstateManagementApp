@@ -47,11 +47,11 @@ public class AuthController : ControllerBase
         return Unauthorized();
     }
 
-    [AcceptVerbs("Post")]
-    public IActionResult TestUpload(object model)
+    [HttpPost("[action]")]
+    public async Task Save(IList<IFormFile> UploadFiles)
     {
         var test = HttpContext.Request;
-        return Ok(null);
+       
     }
 
 }
