@@ -46,4 +46,12 @@ public class AuthController : ControllerBase
         }
         return Unauthorized();
     }
+
+    [AcceptVerbs("Post")]
+    public IActionResult TestUpload(object model)
+    {
+        var test = HttpContext.Request;
+        return Ok(null);
+    }
+
 }

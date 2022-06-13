@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { FileInfo } from '@syncfusion/ej2-angular-inputs';
 import { PropertyModel } from '../interfaces/property.model';
 
 @Component({
@@ -11,10 +12,11 @@ import { PropertyModel } from '../interfaces/property.model';
 export class ListPropertyComponent implements OnInit {
 
     public path: Object = {
-      saveUrl: 'C:\\',
+      saveUrl: 'https://localhost:7243/api/Auth',
       removeUrl: 'https://aspnetmvc.syncfusion.com/services/api/uploadbox/Remove'
   };
-  
+
+  public buttons = { browse: "Alege imagini"};
   public dropElement: HTMLElement = document.getElementsByClassName('control-fluid')[0] as HTMLElement;
   property: PropertyModel;
   constructor(private http: HttpClient) {
@@ -27,6 +29,9 @@ export class ListPropertyComponent implements OnInit {
 
   }
   fileName = '';
+  uploadFile(fileInfo:FileInfo){
+    
+  }
 
   
 }
