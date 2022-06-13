@@ -159,5 +159,27 @@ public class DataService : IDataService
         await _context.SaveChangesAsync();
         return user;
     }
+
+    public async Task<User> GetUserById(int userId)
+    {
+        return await _context.Users.Where(i => i.UserId == userId).FirstOrDefaultAsync();
+    }
+
+    public async Task<Landlord> GetLandlordByUserId(int userId)
+    {
+        return await _context.Landlords.Where(i => i.UserId == userId).FirstOrDefaultAsync();
+    }
+
+    public async Task<Tenant> GetTenantByUserId(int userId)
+    {
+        return await _context.Tenants.Where(i => i.UserId == userId).FirstOrDefaultAsync();
+    }
+
+    public async Task<UploadedImage> TransferImageToDatabase(UploadedImage uploadedImage)
+    {
+        _context.UploadedImages.Add(uploadedImage);
+        await _context.SaveChangesAsync();
+        return uploadedImage;
+    }
 }
 

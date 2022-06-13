@@ -1,9 +1,9 @@
 <div class="login-page">
     <mat-card class="mat-elevation-z12">
-      <mat-tab-group preserveContent="true" mat-stretch-tabs class="example-stretched-tabs">
-        <mat-tab label="Date proprietate">
+      <mat-tab-group [(selectedIndex)]="tabIndex" preserveContent="true" mat-stretch-tabs class="example-stretched-tabs">
+        <mat-tab [disabled]="isFirstTabDisabled" label="Date proprietate">
             <mat-card-content>
-              <form #propertyForm="ngForm" (ngSubmit)="createProperty(propertyForm)">
+              <form #propertyForm="ngForm">
                 <mat-form-field>
                   <input
                     matInput
@@ -45,7 +45,7 @@
               </form>
             </mat-card-content>
         </mat-tab>
-        <mat-tab label="Imagini proprietate">
+        <mat-tab [disabled]="isSecondTabDisabled" label="Imagini proprietate">
             <mat-card-content>
                 <div class="control-section" style="width: 80%;margin: auto;">
                     <div class="col-lg-9">

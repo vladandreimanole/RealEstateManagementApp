@@ -9,7 +9,7 @@ namespace DataManager.Models
         public string? Email { get; set; }
         public string? Password { get; set; }
 
-        public virtual Landlord UserNavigation { get; set; } = null!;
+        public virtual Landlord? Landlord { get; set; }
         public virtual Tenant Tenant { get; set; } = null!;
     }
 }

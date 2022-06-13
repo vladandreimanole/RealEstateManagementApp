@@ -21,6 +21,7 @@ namespace DataManager.Models
         public virtual DbSet<Property> Properties { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<Tenant> Tenants { get; set; } = null!;
+        public virtual DbSet<UploadedImage> UploadedImages { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -34,8 +35,6 @@ namespace DataManager.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<Contract>(entity =>
             {
                 entity.HasIndex(e => e.PropertyId, "IX_Contracts")
@@ -52,6 +51,11 @@ namespace DataManager.Models
                 entity.Property(e => e.LastName).HasMaxLength(50);
 
                 entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+
+                entity.HasOne(d => d.User)
+                    .WithOne(p => p.Landlord)
+                    .HasForeignKey<Landlord>(d => d.UserId)
+                    .HasConstraintName("FK_Landlords_Users");
             });
 
             modelBuilder.Entity<Property>(entity =>
@@ -98,23 +102,25 @@ namespace DataManager.Models
                     .WithOne(p => p.Tenant)
                     .HasForeignKey<Tenant>(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Tenants_Users");
+                    .HasConstraintName("FK_Tenants_Users1");
+            });
+
+            modelBuilder.Entity<UploadedImage>(entity =>
+            {
+                entity.HasKey(e => e.ImageId);
+
+                entity.HasOne(d => d.Property)
+                    .WithMany(p => p.UploadedImages)
+                    .HasForeignKey(d => d.PropertyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UploadedImages_Properties");
             });
 
             modelBuilder.Entity<User>(entity =>
             {
-                entity.Property(e => e.UserId).ValueGeneratedOnAdd();
-
                 entity.Property(e => e.Email).HasMaxLength(50);
 
                 entity.Property(e => e.Password).HasMaxLength(50);
-
-                entity.HasOne(d => d.UserNavigation)
-                    .WithOne(p => p.User)
-                    .HasPrincipalKey<Landlord>(p => p.UserId)
-                    .HasForeignKey<User>(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Users_Landlords");
             });
 
             OnModelCreatingPartial(modelBuilder);

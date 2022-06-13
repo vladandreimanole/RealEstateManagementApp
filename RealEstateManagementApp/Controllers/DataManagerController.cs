@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace RealEstateManagementApp.Controllers;
 
 [ApiController]
-[Route("[controller]/[action]")]
+[Route("api/[controller]/[action]")]
 public class DataManagerController : Controller
 {
     private readonly IDataService _dataService;
@@ -30,6 +30,13 @@ public class DataManagerController : Controller
         return await _dataService.GetLandlords();
     }
 
+    [HttpGet("{userId}"), Authorize]
+
+    public async Task<Landlord> GetLandlordByUserId(int userId)
+    {
+        return await _dataService.GetLandlordByUserId(userId);
+    }
+
     [HttpGet, Authorize]
 
     public async Task<List<Tenant>> GetTenants()
@@ -43,10 +50,11 @@ public class DataManagerController : Controller
     {
         return await _dataService.GetProperties();
     }
-    [HttpPost, Authorize]
+    [HttpGet("{properyId}")]
 
     public async Task<Property> GetPropertyById(int properyId)
     {
+        var test = new Property();
         var props = await _dataService.GetProperties();
         return props.Where(i => i.PropertyId == properyId).FirstOrDefault(new Property());
     }
@@ -65,6 +73,13 @@ public class DataManagerController : Controller
     {
 
         return await _dataService.CreateTenant(tenant);
+    }
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<Property> CreateProperty([FromBody] Property property)
+    {
+        //return new Property();
+        return await _dataService.CreateProperty(property);
     }
 
     [HttpPost, Authorize]

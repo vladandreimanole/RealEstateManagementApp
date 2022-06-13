@@ -42,16 +42,9 @@ public class AuthController : ControllerBase
                 signingCredentials: signinCredentials
             );
             var tokenString = new JwtSecurityTokenHandler().WriteToken(tokeOptions);
-            return Ok(new AuthenticatedResponse { Token = tokenString, Email = realUserFromDb.Email});
+            return Ok(new AuthenticatedResponse { Token = tokenString, Email = realUserFromDb.Email, userId = realUserFromDb.UserId});
         }
         return Unauthorized();
-    }
-
-    [HttpPost("[action]")]
-    public async Task Save(IList<IFormFile> UploadFiles)
-    {
-        var test = HttpContext.Request;
-       
     }
 
 }

@@ -11,13 +11,13 @@ namespace DataManager.Models
         }
 
         public int LandlordId { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Address { get; set; }
         public string? PhoneNumber { get; set; }
 
-        public virtual User User { get; set; } = null!;
+        public virtual User? User { get; set; }
         public virtual ICollection<Property> Properties { get; set; }
     }
 }
