@@ -1,8 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace DataManager.Models
 {
-    [Table("Properties", Schema = "dbo")]
     public partial class Property
     {
         public Property()
@@ -19,10 +19,6 @@ namespace DataManager.Models
 
         public virtual User? User { get; set; }
         public virtual Contract? Contract { get; set; }
-        public virtual ICollection<UploadedImage> UploadedImages { get; set; }
-        public int? TenantId { get; set; }
-        public int? LandlordId { get; set; }
-        [NotMapped]
-        public virtual Contract? PropertyNavigation { get; set; } = null!;
+        public virtual ICollection<UploadedImage>? UploadedImages { get; set; }
     }
 }
