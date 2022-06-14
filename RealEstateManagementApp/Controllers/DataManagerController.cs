@@ -28,7 +28,7 @@ public class DataManagerController : Controller
 
     [HttpGet, Authorize]
 
-    public async Task<List<Property>> GetAllProperies()
+    public async Task<List<Property>> GetAllProperties()
     {
         return await _dataService.GetProperties();
     }

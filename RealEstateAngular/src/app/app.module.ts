@@ -16,8 +16,9 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { ListPropertyComponent } from './list-property/list-property.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
-import {RouterModule} from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { PropertiesComponent } from './properties/properties.component';
+import { CarouselModule } from "@syncfusion/ej2-angular-navigations";
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -50,7 +51,8 @@ export function tokenGetter() {
     MaterialModule,
     ReactiveFormsModule,
     UploaderModule,
-    RouterModule
+    RouterModule,
+    CarouselModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

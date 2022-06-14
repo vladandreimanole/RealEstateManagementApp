@@ -31,7 +31,7 @@ public class ImageController : ControllerBase
                     UploadedImage img = new()
                     {
                         PropertyId = propertyId,
-                        ImageData = fileBytes
+                        ImageData = s
                     };
                     await _dataService.TransferImageToDatabase(img);
                 }

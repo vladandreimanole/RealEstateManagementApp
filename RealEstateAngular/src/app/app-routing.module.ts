@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './home/home.component';
 import { ListPropertyComponent } from './list-property/list-property.component';
 import { LoginComponent } from './login/login.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
+import { PropertiesComponent } from './properties/properties.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'properties', component: HomeComponent },
+      { path: 'properties', component: PropertiesComponent },
       { path: 'list-property', component: ListPropertyComponent },
     ]
   },

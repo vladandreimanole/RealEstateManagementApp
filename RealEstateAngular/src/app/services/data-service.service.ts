@@ -20,8 +20,8 @@ export class DataService {
         })
             .subscribe({
                 next: (response: User) => {
-                    const Email = response.Email;
-                    const Password = response.Password;
+                    const Email = response.email;
+                    const Password = response.password;
                 },
                 error: (err: HttpErrorResponse) => {
                     this._snackBar.open('Cannot create user', 'Close', {
@@ -46,6 +46,17 @@ export class DataService {
             'Authorization': 'Bearer ' + jwt
          });
         var response = await this.http.get<Landlord>(environment.urlServices + "DataManager/GetLandlordByUserId/" + userId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+        
+    }
+
+    async getProperties() {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.get<PropertyModel[]>(environment.urlServices + "DataManager/GetAllProperties/", { headers: reqHeader }).toPromise();
         return response;
         
     }

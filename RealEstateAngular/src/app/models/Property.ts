@@ -1,8 +1,13 @@
+import { UploadedImages } from "./UploadedImages"
+import { User } from "./User"
+
 export class PropertyModel {
     propertyId: number = 0
-    PropertyName?: string
-    City?: string
-    Address?: string
-    Value?: number
+    propertyName?: string
+    city?: string
+    address?: string
+    value?: number
     userId?: number
+    user?: User
+    uploadedImages?: UploadedImages[]
   }

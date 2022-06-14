@@ -70,7 +70,41 @@ public class DataService : IDataService
 
     public async Task<List<Property>> GetProperties()
     {
-        return await _context.Properties.ToListAsync();
+        var items = _context.Properties.AsQueryable();
+        items = items.Include(i => i.User);
+        items = items.Include(i => i.Contract);
+        items = items.Include(i => i.UploadedImages);
+        var res = await (from property in items
+                  select new Property
+                  {
+                      PropertyId = property.PropertyId,
+                      PropertyName = property.PropertyName,
+                      Address = property.Address,
+                      City = property.City,
+                      UserId = property.UserId,
+                      Value = property.Value,
+                      User = new User
+                      {
+                          Address = property.User.Address,
+                          UserId = property.User.UserId,
+                          Email = property.User.Email,
+                          FirstName = property.User.FirstName,
+                          LastName = property.User.LastName,
+                          PhoneNumber = property.User.PhoneNumber
+                      },
+                      UploadedImages = (ICollection<UploadedImage>)
+                                       (from image in property.UploadedImages
+                                        select new UploadedImage
+                                        {
+                                            ImageData = image.ImageData,
+                                            ImageId = image.ImageId
+                                        }),
+                      Contract = new Contract
+                      {
+                          TenantId = property.Contract.TenantId,
+                      }
+                  }).ToListAsync();
+        return res;
     }
 
 

@@ -86,7 +86,7 @@
                   name="email"
                   ngModel
                   #email="ngModel"
-                  [(ngModel)]="user.Email">>
+                  [(ngModel)]="user.email">>
                   <mat-error *ngIf="email.invalid">Email is required</mat-error>
                 <mat-icon matSuffix>email</mat-icon>
               </mat-form-field>
@@ -100,7 +100,7 @@
                   name="password"
                   ngModel
                   #password="ngModel"
-                  [(ngModel)]="user.Password">>
+                  [(ngModel)]="user.password">>
                   <mat-error
                     *ngIf="password.errors && password.errors?.['required']">
                     Password is required
