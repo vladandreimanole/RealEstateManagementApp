@@ -27,23 +27,21 @@ namespace DataManager.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-OIPLHJT;Database=RealEstate_App;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-I15KRP2\\KPIMAILER;Database=RealEstate_App;Trusted_Connection=True;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<Contract>(entity =>
             {
                 entity.HasIndex(e => e.PropertyId, "IX_Contracts_1")
                     .IsUnique();
-
                 entity.HasOne(d => d.Property)
                     .WithOne(p => p.Contract)
                     .HasForeignKey<Contract>(d => d.PropertyId)
                     .HasConstraintName("FK_Contracts_Properties");
+
             });
 
             modelBuilder.Entity<Property>(entity =>
@@ -59,6 +57,18 @@ namespace DataManager.Models
             modelBuilder.Entity<Role>(entity =>
             {
                 entity.Property(e => e.RoleName).HasMaxLength(50);
+            });
+
+            modelBuilder.Entity<UploadedImage>(entity =>
+            {
+                entity.HasKey(e => e.ImageId);
+
+                entity.HasOne(d => d.Property)
+                    .WithMany(p => p.UploadedImages)
+                    .HasForeignKey(d => d.PropertyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UploadedImages_Properties")
+                    .HasConstraintName("FK_Tenants_Users1");
             });
 
             modelBuilder.Entity<UploadedImage>(entity =>
@@ -89,6 +99,7 @@ namespace DataManager.Models
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Users_Roles");
+
             });
 
             OnModelCreatingPartial(modelBuilder);

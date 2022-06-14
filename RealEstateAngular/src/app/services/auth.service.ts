@@ -28,6 +28,7 @@ export class AuthenticationService {
     logOut = () => {
         localStorage.removeItem("jwt");
         localStorage.removeItem("userEmail");
+        localStorage.removeItem("userId");
     }
 
     login(credentials: LoginModel) {
@@ -40,6 +41,7 @@ export class AuthenticationService {
                     const email = response.email;
                     localStorage.setItem("jwt", token);
                     localStorage.setItem("userEmail", email);
+                    localStorage.setItem("userId", response.userId.toString());
                     this.router.navigate(["/home"]);
                 },
                 error: (err: HttpErrorResponse) => {

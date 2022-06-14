@@ -28,6 +28,10 @@
 
     Task<User> GetUserByEmail(string email);
 
+    Task<User> GetUserById(int userId);
+    Task<Landlord> GetLandlordByUserId(int userId);
+    Task<Tenant> GetTenantByUserId(int userId);
+    Task<UploadedImage> TransferImageToDatabase(UploadedImage uploadedImage);
 
     }
 
