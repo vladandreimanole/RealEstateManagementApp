@@ -18,13 +18,7 @@ namespace DataManager.Models
         public string? Address { get; set; }
         public int RoleId { get; set; }
         public string? PhoneNumber { get; set; }
-
-<<<<<<< HEAD
         public virtual Role Role { get; set; } = null!;
         public virtual ICollection<Property> Properties { get; set; }
-=======
-        public virtual Landlord? Landlord { get; set; }
-        public virtual Tenant Tenant { get; set; } = null!;
->>>>>>> 5d862cbe963a2da1fac81ce29274c14768549eac
     }
 }

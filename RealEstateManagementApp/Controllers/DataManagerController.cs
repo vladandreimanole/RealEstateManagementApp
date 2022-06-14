@@ -24,22 +24,7 @@ public class DataManagerController : Controller
 
 
 
-<<<<<<< HEAD
-=======
-    [HttpGet("{userId}"), Authorize]
-
-    public async Task<Landlord> GetLandlordByUserId(int userId)
-    {
-        return await _dataService.GetLandlordByUserId(userId);
-    }
-
-    [HttpGet, Authorize]
-
-    public async Task<List<Tenant>> GetTenants()
-    {
-        return await _dataService.GetTenants();
-    }
->>>>>>> 5d862cbe963a2da1fac81ce29274c14768549eac
+ 
 
     [HttpGet, Authorize]
 
@@ -63,16 +48,7 @@ public class DataManagerController : Controller
 
         return await _dataService.CreateUserAccount(user);
     }
-
-<<<<<<< HEAD
-=======
-    [HttpPost, Authorize]
-
-    public async Task<Tenant> CreateTenant([FromBody] Tenant tenant)
-    {
-
-        return await _dataService.CreateTenant(tenant);
-    }
+ 
     [AllowAnonymous]
     [HttpPost]
     public async Task<Property> CreateProperty([FromBody] Property property)
@@ -81,14 +57,6 @@ public class DataManagerController : Controller
         return await _dataService.CreateProperty(property);
     }
 
-    [HttpPost, Authorize]
-
-    public async Task<Landlord> CreateLandLord([FromBody] Landlord landlord)
-    {
-
-        return await _dataService.CreateLandLord(landlord);
-    }
->>>>>>> 5d862cbe963a2da1fac81ce29274c14768549eac
     [HttpDelete, Authorize]
 
     public async Task<Property> DeleteProperty(int propertyId)
