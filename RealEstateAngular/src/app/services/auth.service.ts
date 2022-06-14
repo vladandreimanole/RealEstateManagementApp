@@ -42,7 +42,7 @@ export class AuthenticationService {
                     localStorage.setItem("jwt", token);
                     localStorage.setItem("userEmail", email);
                     localStorage.setItem("userId", response.userId.toString());
-                    this.router.navigate(["/home"]);
+                    this.router.navigate(["properties"]);
                 },
                 error: (err: HttpErrorResponse) => {
                     this._snackBar.open('Email sau parola gresite', 'Close', {

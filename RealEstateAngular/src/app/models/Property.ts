@@ -4,6 +4,5 @@ export class PropertyModel {
     City?: string
     Address?: string
     Value?: number
-    TenantId?: number
-    LandlordId?: number
+    userId?: number
   }

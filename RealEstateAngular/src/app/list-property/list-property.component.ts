@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { FileInfo } from '@syncfusion/ej2-angular-inputs';
-import { PropertyModel } from '../interfaces/property.model';
-import { Landlord } from '../models/Landlord';
+import { PropertyModel } from '../models/Property';
 import { DataService } from '../services/data-service.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class ListPropertyComponent implements OnInit {
   public buttons = { browse: "Alege imagini"};
   public dropElement!: HTMLElement;
   property: PropertyModel;
-  constructor(private http: HttpClient, private dataService: DataService) {
+  constructor(private http: HttpClient, private dataService: DataService, private router:Router) {
     this.property = new PropertyModel();
   }
   ngOnInit(): void {
@@ -34,9 +34,7 @@ export class ListPropertyComponent implements OnInit {
 }
   createProperty = async ( form: NgForm) => {
     if (form.valid) {
-      const userId = Number(localStorage.getItem("userId"));
-      const currentLandlord = await this.dataService.getLandlordByUserId(userId);
-      this.property.LandlordId = currentLandlord!.landlordId;
+      this.property.userId = Number(localStorage.getItem("userId"));
       var result = await this.dataService.createProperty(this.property);
       this.propertyId = result?.propertyId;
       if(result){
@@ -54,6 +52,10 @@ export class ListPropertyComponent implements OnInit {
   fileName = '';
   uploadFile(fileInfo:FileInfo){
     
+  }
+
+  finishListProperty(): void{
+    this.router.navigate(["properties"]);
   }
 
   

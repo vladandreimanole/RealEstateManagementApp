@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'home', component: HomeComponent },
+      { path: 'properties', component: HomeComponent },
       { path: 'list-property', component: ListPropertyComponent },
     ]
   },

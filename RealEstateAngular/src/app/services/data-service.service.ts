@@ -4,8 +4,8 @@ import { User } from '../models/User';
 import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
-import { PropertyModel } from '../interfaces/property.model';
 import { Landlord } from '../models/Landlord';
+import { PropertyModel } from '../models/Property';
 
 @Injectable({
     providedIn: 'root'
