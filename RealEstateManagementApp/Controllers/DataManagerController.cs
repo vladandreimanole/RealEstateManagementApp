@@ -78,5 +78,12 @@ public class DataManagerController : Controller
     {
         return await _dataService.DeleteContract(contractId);
     }
+
+    [HttpGet, Authorize]
+
+    public async Task<List<Role>> GetCurrentRoles()
+    {
+        return await _dataService.GetCurrentRoles();
+    }
 }
 

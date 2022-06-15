@@ -32,5 +32,7 @@
 
     Task<UploadedImage> TransferImageToDatabase(UploadedImage uploadedImage);
 
+    Task<List<Role>> GetCurrentRoles();
+
     }
 
