@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthenticationService } from '../services/auth.service';
 import { DataService } from '../services/data-service.service';
 import { User } from '../models/User';
+import { Role } from '../models/Role';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +17,8 @@ import { User } from '../models/User';
 })
 export class LoginComponent implements OnInit {
 
-  public roles:String[]=['Landlord','Tenant'];
-  public selected='';
+  public roles:Role[]=[];
+  public selectedRole='';
   invalidLogin: boolean | undefined;
   credentials: LoginModel = {email:'', password:''};
   user:User = new User();
@@ -26,8 +27,11 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isUserAuthenticated()) {
-      this.router.navigate(['properties']);
+      this.router.navigate(['properties']);   
     }
+    this.dataService.GetActiveRoles().subscribe(values=>{
+      this.roles = values;
+    });
   }
   login = ( form: NgForm) => {
     if (form.valid) {
@@ -36,7 +40,10 @@ export class LoginComponent implements OnInit {
   } 
 
   signUp = ( form: NgForm) => {
+    
     if (form.valid) {
+      this.user.roleId = this.roles.find(x=>x.roleName == this.selectedRole)?.roleId;
+      console.log(this.user.roleId);
       var result = this.dataService.createUser(this.user);
     }
   }

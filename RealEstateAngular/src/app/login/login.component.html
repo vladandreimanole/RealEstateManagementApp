@@ -130,10 +130,10 @@
               </mat-form-field>
               <mat-form-field>
                 <mat-label>You are a...</mat-label>
-                <mat-select [(ngModel)]="selected" required>
+                <mat-select [(value)]="selectedRole" required>
                   <mat-option>--</mat-option>
-                  <mat-option *ngFor="let role of roles" [value]="role">
-                    {{role}}
+                  <mat-option *ngFor="let role of roles" [value]="role.roleName">
+                    {{role.roleName}}
                   </mat-option>
                 </mat-select>
               </mat-form-field>

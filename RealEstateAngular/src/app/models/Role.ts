@@ -1,6 +1,6 @@
 export class Role{
    
-    RoleId!:number;
+    roleId!:number;
     
-    RoleName:string='';
+    roleName:string='';
 }

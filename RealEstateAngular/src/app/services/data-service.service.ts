@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Landlord } from '../models/Landlord';
 import { PropertyModel } from '../models/Property';
+import { Role } from '../models/Role';
 
 @Injectable({
     providedIn: 'root'
@@ -15,22 +16,21 @@ export class DataService {
     constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
 
     createUser(user: User) {
-        return this.http.post<User>(environment.urlServices + "DataManager/CreateUser", user, {
-            headers: new HttpHeaders({ "Content-Type": "application/json" })
-        })
+        return this.http.post<User>(environment.urlServices + "DataManager/CreateUser", user)
             .subscribe({
-                next: (response: User) => {
-                    const Email = response.email;
-                    const Password = response.password;
-                },
                 error: (err: HttpErrorResponse) => {
-                    this._snackBar.open('Cannot create user', 'Close', {
+                    this._snackBar.open('Cannot create user' + err.message, 'Close', {
                         horizontalPosition: "right",
                         verticalPosition: "top",
                         duration: 3000
                     });
                 }
             })
+    }
+
+     public GetActiveRoles() : Observable<Role[]>{
+        const url = environment.urlServices + 'DataManager/GetCurrentRoles';
+        return this.http.get<Role[]>(url);
     }
 
     async createProperty(property: PropertyModel) {
