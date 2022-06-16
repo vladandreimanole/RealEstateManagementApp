@@ -66,18 +66,71 @@
               <mat-form-field>
                 <input
                   matInput
-                  placeholder="User Name"
+                  placeholder="First name"
                   required
-                  name="username"
+                  name="firstname"
                   ngModel
-                  #username="ngModel">
+                  #firstname="ngModel"
+                  [(ngModel)]="user.firstName">
                 <mat-icon matSuffix>perm_identity</mat-icon>
                 <mat-error
-                  *ngIf="username.invalid">
-                  Username is required
+                  *ngIf="firstname.invalid">
+                  First name is required
                 </mat-error>
   
-              </mat-form-field>
+              </mat-form-field>  
+
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Last name"
+                  required
+                  name="lastname"
+                  ngModel
+                  #lastname="ngModel"
+                  [(ngModel)]="user.lastName">
+                <mat-icon matSuffix>perm_identity</mat-icon>
+                <mat-error
+                  *ngIf="lastname.invalid">
+                  Last name is required
+                </mat-error>
+  
+              </mat-form-field> 
+
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Address"
+                  required
+                  name="address"
+                  ngModel
+                  #address="ngModel"
+                  [(ngModel)]="user.address">
+                <mat-icon matSuffix>home</mat-icon>
+                <mat-error
+                  *ngIf="address.invalid">
+                  Address is required
+                </mat-error>
+  
+              </mat-form-field> 
+
+              <mat-form-field>
+                <input
+                  matInput
+                  placeholder="Phone"
+                  required
+                  name="phone"
+                  ngModel
+                  #phone="ngModel"
+                  [(ngModel)]="user.phoneNumber">
+                <mat-icon matSuffix>phone</mat-icon>
+                <mat-error
+                  *ngIf="phone.invalid">
+                  Phone number is required
+                </mat-error>
+  
+              </mat-form-field> 
+
               <mat-form-field>
                 <input
                   matInput
@@ -129,13 +182,18 @@
                 <mat-icon matSuffix>lock</mat-icon>
               </mat-form-field>
               <mat-form-field>
-                <mat-label>You are a...</mat-label>
+                <mat-label  ngModel name="userType"
+                #userType="ngModel">You are a...</mat-label>
                 <mat-select [(value)]="selectedRole" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let role of roles" [value]="role.roleName">
                     {{role.roleName}}
                   </mat-option>
                 </mat-select>
+                <mat-error
+                *ngIf="userType.errors && userType.errors?.['required']">
+                User type is required
+              </mat-error>
               </mat-form-field>
               <button
                 mat-raised-button
