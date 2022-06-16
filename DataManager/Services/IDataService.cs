@@ -34,5 +34,7 @@
     Task<Property> GetPropertyById(int propertyId);
     Task<List<UploadedImage>> GetUploadedImagesByPropertyId(int propertyId);
 
+    Task<List<Role>> GetCurrentRoles();
+
     }
 

@@ -68,6 +68,11 @@ public class DataService : IDataService
         return await _context.Contracts.ToListAsync();
     }
 
+    public async Task<List<Role>> GetCurrentRoles()
+    {
+        return await _context.Roles.ToListAsync();
+    }
+
     public List<Property> GetProperties()
     {
         var items = _context.Properties.AsQueryable();

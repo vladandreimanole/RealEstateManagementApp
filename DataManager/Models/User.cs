@@ -20,8 +20,8 @@ namespace DataManager.Models
         public int RoleId { get; set; }
         public string? PhoneNumber { get; set; }
 
-        public virtual Role Role { get; set; } = null!;
-        public virtual ICollection<Contract> Contracts { get; set; }
-        public virtual ICollection<Property> Properties { get; set; }
+        public virtual Role? Role { get; set; } = null!;
+        public virtual ICollection<Contract>? Contracts { get; set; }
+        public virtual ICollection<Property>? Properties { get; set; }
     }
 }

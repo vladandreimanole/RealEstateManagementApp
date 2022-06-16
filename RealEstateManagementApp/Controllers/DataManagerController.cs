@@ -21,10 +21,13 @@ public class DataManagerController : Controller
     {
         return await _dataService.GetContracts();
     }
+    [AllowAnonymous]
+    [HttpGet]
 
-
-
- 
+    public async Task<List<Role>> GetCurrentRoles()
+    {
+        return await _dataService.GetCurrentRoles();
+    }
 
     [HttpGet, Authorize]
 
@@ -54,9 +57,9 @@ public class DataManagerController : Controller
         return await _dataService.GetUserById(userId);
     }
 
-    [HttpPost, Authorize]
-
-    public async Task<User> CreateUser([FromBody] User user)
+    [AllowAnonymous]
+    [HttpPost]
+    public async Task<User> CreateUser( User user)
     {
 
         return await _dataService.CreateUserAccount(user);
@@ -91,5 +94,6 @@ public class DataManagerController : Controller
     {
         return await _dataService.DeleteContract(contractId);
     }
+
 }
 
