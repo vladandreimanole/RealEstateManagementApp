@@ -4,6 +4,7 @@ import { ListPropertyComponent } from './list-property/list-property.component';
 import { LoginComponent } from './login/login.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { PropertiesComponent } from './properties/properties.component';
+import { PropertyComponent } from './property/property.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
     children: [
       { path: 'properties', component: PropertiesComponent },
       { path: 'list-property', component: ListPropertyComponent },
+      { path: 'property/:propertyId', component: PropertyComponent },
     ]
   },
 ];

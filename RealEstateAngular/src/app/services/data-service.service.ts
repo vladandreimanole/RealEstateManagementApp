@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 import { Landlord } from '../models/Landlord';
 import { PropertyModel } from '../models/Property';
+import { UploadedImages } from '../models/UploadedImages';
 
 @Injectable({
     providedIn: 'root'
@@ -57,6 +58,47 @@ export class DataService {
             'Authorization': 'Bearer ' + jwt
          });
         var response = await this.http.get<PropertyModel[]>(environment.urlServices + "DataManager/GetAllProperties/", { headers: reqHeader }).toPromise();
+        return response;
+        
+    }
+
+    async getPropertyById(propertyId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.get<PropertyModel>(environment.urlServices + "DataManager/GetPropertyById/" + propertyId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
+    async getUserById(userId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.get<User>(environment.urlServices + "DataManager/GetUserById/" + userId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
+    async getImagesByPropertyId(propertyId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.get<UploadedImages[]>(environment.urlServices + "DataManager/GetImagesByPropertyId/" + propertyId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
+    getPropertiesTest() {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = this.http.get<PropertyModel[]>(environment.urlServices + "DataManager/GetAllProperties/", { headers: reqHeader });
         return response;
         
     }

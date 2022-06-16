@@ -28,17 +28,30 @@ public class DataManagerController : Controller
 
     [HttpGet, Authorize]
 
-    public async Task<List<Property>> GetAllProperties()
+    public List<Property> GetAllProperties()
     {
-        return await _dataService.GetProperties();
+        return  _dataService.GetProperties();
     }
-    [HttpGet("{properyId}")]
+    [HttpGet("{propertyId}"), Authorize]
 
-    public async Task<Property> GetPropertyById(int properyId)
+    public async Task<Property> GetPropertyById(int propertyId)
     {
-        var test = new Property();
-        var props = await _dataService.GetProperties();
-        return props.Where(i => i.PropertyId == properyId).FirstOrDefault(new Property());
+        return await _dataService.GetPropertyById(propertyId);
+    }
+
+    [HttpGet("{propertyId}"), Authorize]
+
+    public async Task<List<UploadedImage>> GetImagesByPropertyId(int propertyId)
+    {
+        return await _dataService.GetUploadedImagesByPropertyId(propertyId);
+    }
+
+
+    [HttpGet("{userId}"), Authorize]
+
+    public async Task<User> GetUserById(int userId)
+    {
+        return await _dataService.GetUserById(userId);
     }
 
     [HttpPost, Authorize]

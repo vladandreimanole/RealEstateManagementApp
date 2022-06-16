@@ -68,42 +68,42 @@ public class DataService : IDataService
         return await _context.Contracts.ToListAsync();
     }
 
-    public async Task<List<Property>> GetProperties()
+    public List<Property> GetProperties()
     {
         var items = _context.Properties.AsQueryable();
         items = items.Include(i => i.User);
         items = items.Include(i => i.Contract);
         items = items.Include(i => i.UploadedImages);
-        var res = await (from property in items
-                  select new Property
-                  {
-                      PropertyId = property.PropertyId,
-                      PropertyName = property.PropertyName,
-                      Address = property.Address,
-                      City = property.City,
-                      UserId = property.UserId,
-                      Value = property.Value,
-                      User = new User
-                      {
-                          Address = property.User.Address,
-                          UserId = property.User.UserId,
-                          Email = property.User.Email,
-                          FirstName = property.User.FirstName,
-                          LastName = property.User.LastName,
-                          PhoneNumber = property.User.PhoneNumber
-                      },
-                      UploadedImages = (ICollection<UploadedImage>)
-                                       (from image in property.UploadedImages
-                                        select new UploadedImage
-                                        {
-                                            ImageData = image.ImageData,
-                                            ImageId = image.ImageId
-                                        }),
-                      Contract = new Contract
-                      {
-                          TenantId = property.Contract.TenantId,
-                      }
-                  }).ToListAsync();
+        var res = (from property in items
+                   select new Property
+                   {
+                       PropertyId = property.PropertyId,
+                       PropertyName = property.PropertyName,
+                       Address = property.Address,
+                       City = property.City,
+                       UserId = property.UserId,
+                       Value = property.Value,
+                       User = new User
+                       {
+                           Address = property.User.Address,
+                           UserId = property.User.UserId,
+                           Email = property.User.Email,
+                           FirstName = property.User.FirstName,
+                           LastName = property.User.LastName,
+                           PhoneNumber = property.User.PhoneNumber
+                       },
+                       UploadedImages = (ICollection<UploadedImage>)
+                                        (from image in property.UploadedImages
+                                         select new UploadedImage
+                                         {
+                                             ImageData = image.ImageData,
+                                             ImageId = image.ImageId
+                                         }),
+                       Contract = new Contract
+                       {
+                           TenantId = property.Contract.TenantId,
+                       }
+                   }).ToList();
         return res;
     }
 
@@ -150,6 +150,16 @@ public class DataService : IDataService
         _context.UploadedImages.Add(uploadedImage);
         await _context.SaveChangesAsync();
         return uploadedImage;
+    }
+
+    public async Task<Property> GetPropertyById(int propertyId)
+    {
+        return await _context.Properties.Where(i => i.PropertyId == propertyId).FirstOrDefaultAsync();
+    }
+
+    public async Task<List<UploadedImage>> GetUploadedImagesByPropertyId(int propertyId)
+    {
+        return await _context.UploadedImages.Where(i => i.PropertyId == propertyId).ToListAsync();
     }
 }
 

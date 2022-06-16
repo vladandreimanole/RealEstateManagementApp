@@ -16,7 +16,7 @@
 
     Task<Property> UpdateProperty(Property property);
 
-    Task<List<Property>> GetProperties();
+    List<Property> GetProperties();
 
     Task<Contract> CreateContract(Contract contract);
 
@@ -31,6 +31,8 @@
     Task<User> GetUserById(int userId);
 
     Task<UploadedImage> TransferImageToDatabase(UploadedImage uploadedImage);
+    Task<Property> GetPropertyById(int propertyId);
+    Task<List<UploadedImage>> GetUploadedImagesByPropertyId(int propertyId);
 
     }
 

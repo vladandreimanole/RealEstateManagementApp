@@ -19,6 +19,7 @@ import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import { RouterModule } from '@angular/router';
 import { PropertiesComponent } from './properties/properties.component';
 import { CarouselModule } from "@syncfusion/ej2-angular-navigations";
+import { PropertyComponent } from './property/property.component';
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -31,7 +32,8 @@ export function tokenGetter() {
     HomeComponent,
     MainLayoutComponent,
     ListPropertyComponent,
-    PropertiesComponent
+    PropertiesComponent,
+    PropertyComponent
   ],
   imports: [
     BrowserModule,
