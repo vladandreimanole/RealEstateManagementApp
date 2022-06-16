@@ -8,6 +8,7 @@ import { Landlord } from '../models/Landlord';
 import { PropertyModel } from '../models/Property';
 import { Role } from '../models/Role';
 import { UploadedImages } from '../models/UploadedImages';
+import { ContractModel } from '../models/Contract';
 
 @Injectable({
     providedIn: 'root'
@@ -35,8 +36,9 @@ export class DataService {
     }
 
     async createProperty(property: PropertyModel) {
+        let jwt = localStorage.getItem('jwt');
         return await this.http.post<PropertyModel>(environment.urlServices + "DataManager/CreateProperty", property, {
-            headers: new HttpHeaders({ "Content-Type": "application/json" })
+            headers: new HttpHeaders({ "Content-Type": "application/json", 'Authorization': 'Bearer ' + jwt })
         }).toPromise();
     }
 
@@ -101,5 +103,22 @@ export class DataService {
         var response = this.http.get<PropertyModel[]>(environment.urlServices + "DataManager/GetAllProperties/", { headers: reqHeader });
         return response;
         
+    }
+
+
+    createContract(contract: ContractModel) {
+        let jwt = localStorage.getItem('jwt');
+        return this.http.post<ContractModel>(environment.urlServices + "DataManager/CreateContract", contract, {
+            headers: new HttpHeaders({ "Content-Type": "application/json", 'Authorization': 'Bearer ' + jwt })
+        })
+            .subscribe({
+                error: (err: HttpErrorResponse) => {
+                    this._snackBar.open('Cannot create contract' + err.message, 'Close', {
+                        horizontalPosition: "right",
+                        verticalPosition: "top",
+                        duration: 3000
+                    });
+                }
+            })
     }
 }

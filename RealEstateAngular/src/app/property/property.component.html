@@ -25,7 +25,7 @@
             <div class="col-md-5 col-lg-4">
               <div class="property-price">
                 <div class="card-header-c d-flex">
-                  <button class="button">
+                  <button class="button" (click)="openDialog()">
                     <span class="button__text">
                       Rent for ${{property?.value}}
                     </span>
@@ -171,3 +171,6 @@
       </div>
     </div>
   </section>
+
+
+  <button mat-raised-button color="primary">Primary</button>

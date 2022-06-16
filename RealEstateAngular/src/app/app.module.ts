@@ -19,7 +19,9 @@ import { UploaderModule } from '@syncfusion/ej2-angular-inputs';
 import { RouterModule } from '@angular/router';
 import { PropertiesComponent } from './properties/properties.component';
 import { CarouselModule } from "@syncfusion/ej2-angular-navigations";
-import { PropertyComponent } from './property/property.component';
+import { DialogAnimationsExampleDialog, PropertyComponent } from './property/property.component';
+import { DialogModule } from '@syncfusion/ej2-angular-popups';
+import { MatButtonModule } from "@angular/material/button";
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -33,7 +35,8 @@ export function tokenGetter() {
     MainLayoutComponent,
     ListPropertyComponent,
     PropertiesComponent,
-    PropertyComponent
+    PropertyComponent,
+    DialogAnimationsExampleDialog
   ],
   imports: [
     BrowserModule,
@@ -54,7 +57,9 @@ export function tokenGetter() {
     ReactiveFormsModule,
     UploaderModule,
     RouterModule,
-    CarouselModule
+    CarouselModule,
+    DialogModule,
+    MatButtonModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]
