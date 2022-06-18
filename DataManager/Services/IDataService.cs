@@ -35,6 +35,8 @@
     Task<List<UploadedImage>> GetUploadedImagesByPropertyId(int propertyId);
 
     Task<List<Role>> GetCurrentRoles();
+    Task<List<Contract>> GetContractsByLandlordId(int landlordId);
+    Task<List<Contract>> GetContractsByTenantId(int tenantId);
 
     }
 

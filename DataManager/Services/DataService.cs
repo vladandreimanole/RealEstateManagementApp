@@ -166,5 +166,16 @@ public class DataService : IDataService
     {
         return await _context.UploadedImages.Where(i => i.PropertyId == propertyId).ToListAsync();
     }
+
+    public async Task<List<Contract>> GetContractsByLandlordId(int landlordId)
+    {
+        var items = _context.Contracts.Include(i => i.Property);
+        return await items.Where(i => i.Property.UserId == landlordId).ToListAsync();
+    }
+
+    public async Task<List<Contract>> GetContractsByTenantId(int tenantId)
+    {
+        return await _context.Contracts.Where(i => i.TenantId == tenantId).ToListAsync();
+    }
 }
 

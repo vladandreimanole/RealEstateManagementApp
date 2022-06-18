@@ -121,4 +121,26 @@ export class DataService {
                 }
             })
     }
+
+    async getContractByLandlordId(landlordId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.get<ContractModel[]>(environment.urlServices + "DataManager/GetContractByLandlordId/" + landlordId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
+    async getContractByTenantId(tenantId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.get<ContractModel[]>(environment.urlServices + "DataManager/GetContractByTenantId/" + tenantId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
+    
 }

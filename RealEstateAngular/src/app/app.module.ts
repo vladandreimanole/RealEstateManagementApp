@@ -22,6 +22,7 @@ import { CarouselModule } from "@syncfusion/ej2-angular-navigations";
 import { DialogAnimationsExampleDialog, PropertyComponent } from './property/property.component';
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { MatButtonModule } from "@angular/material/button";
+import { RentalsListComponent } from './rentals-list/rentals-list.component';
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -36,7 +37,8 @@ export function tokenGetter() {
     ListPropertyComponent,
     PropertiesComponent,
     PropertyComponent,
-    DialogAnimationsExampleDialog
+    DialogAnimationsExampleDialog,
+    RentalsListComponent
   ],
   imports: [
     BrowserModule,

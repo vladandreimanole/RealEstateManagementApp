@@ -42,6 +42,20 @@ public class DataManagerController : Controller
         return await _dataService.GetPropertyById(propertyId);
     }
 
+    [HttpGet("{landlordId}"), Authorize]
+
+    public async Task<List<Contract>> GetContractsByLandlordId(int landlordId)
+    {
+        return await _dataService.GetContractsByLandlordId(landlordId);
+    }
+
+    [HttpGet("{tenantId}"), Authorize]
+
+    public async Task<List<Contract>> GetContractsByTenantId(int tenantId)
+    {
+        return await _dataService.GetContractsByTenantId(tenantId);
+    }
+
     [HttpGet("{propertyId}"), Authorize]
 
     public async Task<List<UploadedImage>> GetImagesByPropertyId(int propertyId)

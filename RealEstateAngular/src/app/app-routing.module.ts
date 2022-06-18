@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { PropertiesComponent } from './properties/properties.component';
 import { PropertyComponent } from './property/property.component';
+import { RentalsListComponent } from './rentals-list/rentals-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
       { path: 'properties', component: PropertiesComponent },
       { path: 'list-property', component: ListPropertyComponent },
       { path: 'property/:propertyId', component: PropertyComponent },
+      { path: 'contracts', component: RentalsListComponent },
     ]
   },
 ];
