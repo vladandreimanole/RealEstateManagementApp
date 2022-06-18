@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataManager\DataManager.csproj" />
+    <ProjectReference Include="..\PassResetManager\PassResetManager.csproj" />
   </ItemGroup>
 
   <ItemGroup>

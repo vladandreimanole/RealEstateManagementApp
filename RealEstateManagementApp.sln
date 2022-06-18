@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstateManagementApp", "RealEstateManagementApp\RealEstateManagementApp.csproj", "{9586B72C-E6EE-409C-93F7-3960BAEEED55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstateManagementApp", "RealEstateManagementApp\RealEstateManagementApp.csproj", "{9586B72C-E6EE-409C-93F7-3960BAEEED55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManager", "DataManager\DataManager.csproj", "{DDB6B7D9-538A-4BA5-AC10-CF9C92D4BF00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataManager", "DataManager\DataManager.csproj", "{DDB6B7D9-538A-4BA5-AC10-CF9C92D4BF00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PassResetManager", "PassResetManager\PassResetManager.csproj", "{3A6DF00F-1108-4709-B6B6-C71BE4C82369}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DDB6B7D9-538A-4BA5-AC10-CF9C92D4BF00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDB6B7D9-538A-4BA5-AC10-CF9C92D4BF00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDB6B7D9-538A-4BA5-AC10-CF9C92D4BF00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A6DF00F-1108-4709-B6B6-C71BE4C82369}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A6DF00F-1108-4709-B6B6-C71BE4C82369}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A6DF00F-1108-4709-B6B6-C71BE4C82369}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A6DF00F-1108-4709-B6B6-C71BE4C82369}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

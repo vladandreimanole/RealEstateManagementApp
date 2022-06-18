@@ -1,4 +1,6 @@
 
+using PassResetManager;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddAuthentication(opt => {
@@ -31,7 +33,9 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services.AddCors();
 builder.Services.AddDbContext<RealEstate_AppContext>();
 builder.Services.AddTransient<IDataService, DataService>();
+builder.Services.AddTransient<IResetPasswordManager, ResetPasswordManager>();
 builder.Services.Configure<AuthentificationOptionsMonitor>(builder.Configuration.GetSection(nameof(AuthentificationOptionsMonitor)));
+builder.Services.Configure<EmailOptionsMonitor>(builder.Configuration.GetSection(nameof(EmailOptionsMonitor)));
 
 var app = builder.Build();
 
