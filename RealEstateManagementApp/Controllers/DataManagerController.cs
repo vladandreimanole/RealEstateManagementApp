@@ -9,13 +9,11 @@ namespace RealEstateManagementApp.Controllers;
 public class DataManagerController : Controller
 {
     private readonly IDataService _dataService;
-    private readonly IResetPasswordManager _passwordManager;
     private readonly ILogger<DataManagerController> _logger;
-    public DataManagerController(IDataService dataService, ILogger<DataManagerController> logger, IResetPasswordManager passwordManager)
+    public DataManagerController(IDataService dataService, ILogger<DataManagerController> logger)
     {
         _dataService = dataService;
         _logger = logger;
-        _passwordManager = passwordManager;
     }
 
     [HttpGet, Authorize]
@@ -118,13 +116,6 @@ public class DataManagerController : Controller
         return await _dataService.DeleteContract(contractId);
     }
 
-    [AllowAnonymous]
-    [HttpPost]
-    public async Task SendResetEmail(string email)
-    {
-
-        await _passwordManager.SendResetPasswordForUser(email);
-    }
 
 }
 

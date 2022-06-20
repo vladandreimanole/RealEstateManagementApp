@@ -22,6 +22,25 @@ public class ResetPasswordManager : IResetPasswordManager
         _optionsMonitor = optionsMonitor;
     }
 
+    public async Task<bool> VerifyResetTokenForUser(string email, string token)
+    {
+        bool isCorect = false;
+        try
+        {
+            var user = await _dataService.GetUserByEmail(email);
+
+            isCorect = user.PassResetToken == token ? true : false;
+
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"Exception occured while verifying reset token for user {email}");
+            return false;
+        }
+
+        return isCorect;
+    }
+
     public async Task SendResetPasswordForUser(string email)
     {
         try
