@@ -29,7 +29,7 @@ export class MainLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.authService.isUserAuthenticated()) {
-      this.router.navigate(['/login']);
+      //this.router.navigate(['/login']);
     }
   }
   isUserAuthenticated = (): boolean => {

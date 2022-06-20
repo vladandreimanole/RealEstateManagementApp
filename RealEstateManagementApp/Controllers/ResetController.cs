@@ -18,7 +18,7 @@ public class ResetController : Controller
 
 
     [AllowAnonymous]
-    [HttpPost]
+    [HttpGet]
     public async Task SendResetEmail(string email)
     {
 
@@ -26,7 +26,7 @@ public class ResetController : Controller
     }
 
     [AllowAnonymous]
-    [HttpPost]
+    [HttpGet]
     public async Task<bool> VerifyToken(string email, string token)
     {
 

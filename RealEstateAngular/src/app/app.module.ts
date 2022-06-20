@@ -23,6 +23,7 @@ import { DialogAnimationsExampleDialog, PropertyComponent } from './property/pro
 import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { MatButtonModule } from "@angular/material/button";
 import { RentalsListComponent } from './rentals-list/rentals-list.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -38,7 +39,8 @@ export function tokenGetter() {
     PropertiesComponent,
     PropertyComponent,
     DialogAnimationsExampleDialog,
-    RentalsListComponent
+    RentalsListComponent,
+    PasswordResetComponent
   ],
   imports: [
     BrowserModule,

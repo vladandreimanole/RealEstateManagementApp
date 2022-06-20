@@ -39,6 +39,9 @@ export class LoginComponent implements OnInit {
     }
   } 
 
+  resetPassword=(even:any)=>{
+    
+  }
   signUp = ( form: NgForm) => {
     
     if (form.valid) {

@@ -40,15 +40,15 @@
                     required
                     minlength="6"
                     name="password"
-                    [(ngModel)]="credentials.password">
+                     [(ngModel)]="credentials.password">
                     <mat-error
                       *ngIf="password.errors && password.errors?.['required']">
                       Parola este obligatorie
                     </mat-error>
-                    <mat-error
+                     <mat-error
                       *ngIf="password.errors && password.errors?.['minlength']">
                       Parola trebuie sa aiba minim 6 caractere
-                    </mat-error>
+                     </mat-error>
                   <mat-icon matSuffix>lock</mat-icon>
                 </mat-form-field>
                 <button
@@ -58,6 +58,7 @@
                   Sign In
                 </button>
               </form>
+              <a style="text-align: right; float:right" [routerLink]="['/app-password-reset']">Forgot password</a>
             </mat-card-content>
         </mat-tab>
         <mat-tab label="Sign Up">
@@ -182,18 +183,14 @@
                 <mat-icon matSuffix>lock</mat-icon>
               </mat-form-field>
               <mat-form-field>
-                <mat-label  ngModel name="userType"
-                #userType="ngModel">You are a...</mat-label>
+                <mat-label>You are a...</mat-label>
                 <mat-select [(value)]="selectedRole" required>
                   <mat-option>--</mat-option>
                   <mat-option *ngFor="let role of roles" [value]="role.roleName">
                     {{role.roleName}}
                   </mat-option>
                 </mat-select>
-                <mat-error
-                *ngIf="userType.errors && userType.errors?.['required']">
-                User type is required
-              </mat-error>
+      
               </mat-form-field>
               <button
                 mat-raised-button
@@ -205,6 +202,7 @@
           </mat-card-content>
         </mat-tab>
       </mat-tab-group>
+
     </mat-card>
   </div>
   
