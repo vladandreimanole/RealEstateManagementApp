@@ -8,7 +8,7 @@
       </button>
   
       <a class="navbar-brand" [routerLink]="['/']" matTooltip="Home">
-        <img src="/assets/images/logo.png" width="auto" height="80">
+        <img src="/assets/images/logo.png" width="auto" height="160">
       </a>
   
       <span class="navbar-spacer"></span>
@@ -72,17 +72,12 @@
             </mat-icon>
             <p mat-line> List a property </p>
           </a>
-
-          <mat-divider></mat-divider>
-  
-          <h3 mat-subheader>Another section</h3>
-          <a mat-list-item href="https://material.angular.io/components/categories" target="_blank">
+          <a mat-list-item [routerLink]="['/list-property']" routerLinkActive="active">
             <mat-icon mat-list-icon>
-              link
+              dashboard
             </mat-icon>
-            <p mat-line> Material Components </p>
+            <p mat-line> Contracts </p>
           </a>
-  
           <a id="push-bottom" mat-list-item [routerLink]="['/about']" routerLinkActive="active">
             <mat-icon mat-list-icon>
               info_outline
