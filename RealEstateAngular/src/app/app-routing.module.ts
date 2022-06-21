@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ContractComponent } from './contract/contract.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ListPropertyComponent } from './list-property/list-property.component';
 import { LoginComponent } from './login/login.component';
@@ -8,6 +9,7 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 import { PropertiesComponent } from './properties/properties.component';
 import { PropertyComponent } from './property/property.component';
 import { RentalsListComponent } from './rentals-list/rentals-list.component';
+import { TenantRentalsComponent } from './tenant-rentals/tenant-rentals.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,7 +21,9 @@ const routes: Routes = [
       { path: 'properties', component: PropertiesComponent,canActivate: [AuthGuard]},
       { path: 'list-property', component: ListPropertyComponent,canActivate: [AuthGuard] },
       { path: 'property/:propertyId', component: PropertyComponent,canActivate: [AuthGuard] },
-      { path: 'contracts', component: RentalsListComponent, canActivate: [AuthGuard] }
+      { path: 'rentals-list', component: RentalsListComponent, canActivate: [AuthGuard] },
+      { path: 'my-rentals', component: TenantRentalsComponent, canActivate: [AuthGuard] },
+      { path: 'contract/:contractId', component: ContractComponent, canActivate: [AuthGuard] }
     ]
   },
 ];

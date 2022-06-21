@@ -63,7 +63,11 @@ public class DataManagerController : Controller
     {
         return await _dataService.GetUploadedImagesByPropertyId(propertyId);
     }
-
+    [HttpGet("{contractId}"), Authorize]
+    public async Task<Contract> GetContractById(int contractId)
+    {
+        return await _dataService.GetContractById(contractId);
+    }
 
     [HttpGet("{userId}"), Authorize]
 

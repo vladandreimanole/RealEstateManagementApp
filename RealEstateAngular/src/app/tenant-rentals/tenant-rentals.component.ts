@@ -3,16 +3,16 @@ import { ContractModel } from '../models/Contract';
 import { DataService } from '../services/data-service.service';
 
 @Component({
-  selector: 'app-rentals-list',
-  templateUrl: './rentals-list.component.html',
-  styleUrls: ['./rentals-list.component.scss']
+  selector: 'app-tenant-rentals',
+  templateUrl: './tenant-rentals.component.html',
+  styleUrls: ['./tenant-rentals.component.scss']
 })
-export class RentalsListComponent implements OnInit {
+export class TenantRentalsComponent implements OnInit {
 
   constructor(private dataService: DataService) { }
   public contracts: ContractModel[] = [];
   async ngOnInit(): Promise<void> {
-    this.contracts = (await this.dataService.getContractByLandlordId(Number(localStorage.getItem("userId"))))!;
+    this.contracts = (await this.dataService.getContractByTenantId(Number(localStorage.getItem("userId"))))!;
   }
 
 }

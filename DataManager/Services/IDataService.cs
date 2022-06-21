@@ -37,6 +37,7 @@
     Task<List<Role>> GetCurrentRoles();
     Task<List<Contract>> GetContractsByLandlordId(int landlordId);
     Task<List<Contract>> GetContractsByTenantId(int tenantId);
+    Task<Contract> GetContractById(int contractId);
 
     }
 

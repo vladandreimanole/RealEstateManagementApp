@@ -1,0 +1,17 @@
+<div class="container">
+    <ul class="responsive-table">
+      <li class="table-header">
+        <div class="col col-1">Address</div>
+        <div class="col col-2">Landlord name</div>
+        <div class="col col-3">Landlord phone</div>
+        <div class="col col-4">Signed</div>
+      </li>
+      <li class="table-row" *ngFor="let contract of contracts">
+        <div class="col col-1" data-label="Address">{{contract.property?.address}}</div>
+        <div class="col col-2" data-label="Name">{{contract.property?.user?.firstName + " " + contract.property?.user?.lastName}}</div>
+        <div class="col col-3" data-label="Phone">{{contract.property?.user?.phoneNumber}}</div>
+        <div class="col col-4" data-label="Signed" *ngIf="contract.signed">Yes</div>
+        <div class="col col-4" data-label="Signed" *ngIf="!contract.signed">No</div>
+      </li>
+    </ul>
+  </div>

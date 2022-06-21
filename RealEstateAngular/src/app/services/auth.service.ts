@@ -42,6 +42,7 @@ export class AuthenticationService {
                     localStorage.setItem("jwt", token);
                     localStorage.setItem("userEmail", email);
                     localStorage.setItem("userId", response.userId.toString());
+                    localStorage.setItem("roleId", response.roleId.toString());
                     this.router.navigate(["properties"]);
                 },
                 error: (err: HttpErrorResponse) => {

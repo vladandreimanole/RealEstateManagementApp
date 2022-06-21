@@ -1,7 +1,37 @@
-<ejs-grid [dataSource]='contracts' height='315px'>
+<!--<ejs-grid [dataSource]='contracts' height='315px' style="padding:10px;">
     <e-columns>
         <e-column field='propertyId' headerText='FirstName' width=150></e-column>
         <e-column field='contractId' headerText='Last Name' width=150></e-column>
         <e-column field='tenantId' headerText='City' width=150></e-column>
     </e-columns>
-</ejs-grid>
+</ejs-grid>-->
+
+<div class="container">
+    <ul class="responsive-table">
+      <li class="table-header">
+        <div class="col col-1">Address</div>
+        <div class="col col-2">Tenant name</div>
+        <div class="col col-3">Tenant phone</div>
+        <div class="col col-4">Signed</div>
+        <div class="col col-5">Tools</div>
+      </li>
+      <li class="table-row" *ngFor="let contract of contracts">
+        <div class="col col-1" data-label="Address">{{contract.property?.address}}</div>
+        <div class="col col-2" data-label="Name">{{contract.tenant?.firstName + " " + contract.tenant?.lastName}}</div>
+        <div class="col col-3" data-label="Phone">{{contract.tenant?.phoneNumber}}</div>
+        <div class="col col-4" data-label="Signed" *ngIf="contract.signed">Yes</div>
+        <div class="col col-4" data-label="Signed" *ngIf="!contract.signed">No</div>
+        <div class="col col-5" data-label="Tools">
+            <div style="display: flex; justify-content: space-between;flex-wrap: wrap;">
+                <button mat-icon-button color="accent" style="color:#3f51b5;">
+                    <mat-icon>done_outline</mat-icon>
+                  </button>
+                  <button mat-icon-button color="accent">
+                    <mat-icon>delete</mat-icon>
+                  </button>
+            </div>
+
+        </div>
+      </li>
+    </ul>
+  </div>

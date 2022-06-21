@@ -24,6 +24,9 @@ import { DialogModule } from '@syncfusion/ej2-angular-popups';
 import { MatButtonModule } from "@angular/material/button";
 import { RentalsListComponent } from './rentals-list/rentals-list.component';
 import { PasswordResetComponent } from './password-reset/password-reset.component';
+import { TenantRentalsComponent } from './tenant-rentals/tenant-rentals.component';
+import { ContractComponent } from './contract/contract.component';
+import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -40,7 +43,9 @@ export function tokenGetter() {
     PropertyComponent,
     DialogAnimationsExampleDialog,
     RentalsListComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    TenantRentalsComponent,
+    ContractComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +68,8 @@ export function tokenGetter() {
     RouterModule,
     CarouselModule,
     DialogModule,
-    MatButtonModule
+    MatButtonModule,
+    RichTextEditorAllModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

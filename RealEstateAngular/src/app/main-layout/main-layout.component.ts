@@ -43,5 +43,12 @@ export class MainLayoutComponent implements OnInit {
     localStorage.removeItem("jwt");
     localStorage.removeItem("userEmail");
   }
+  isUserLandlord(){
+    if(localStorage.getItem("roleId") === "1"){
+      return true;
+    }
+    else
+    return false;
+  }
 
 }

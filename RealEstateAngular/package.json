@@ -27,6 +27,7 @@
     "@syncfusion/ej2-angular-inputs": "^20.1.59",
     "@syncfusion/ej2-angular-navigations": "^20.1.60",
     "@syncfusion/ej2-angular-popups": "^20.1.58",
+    "@syncfusion/ej2-angular-richtexteditor": "^20.1.61",
     "@syncfusion/ej2-base": "^20.1.57",
     "carousel": "^0.0.3",
     "rxjs": "~7.5.0",

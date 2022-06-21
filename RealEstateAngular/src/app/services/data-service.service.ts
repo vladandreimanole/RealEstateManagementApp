@@ -128,7 +128,7 @@ export class DataService {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + jwt
          });
-        var response = await this.http.get<ContractModel[]>(environment.urlServices + "DataManager/GetContractByLandlordId/" + landlordId.toString(), { headers: reqHeader }).toPromise();
+        var response = await this.http.get<ContractModel[]>(environment.urlServices + "DataManager/GetContractsByLandlordId/" + landlordId.toString(), { headers: reqHeader }).toPromise();
         return response;
     }
 
@@ -138,7 +138,17 @@ export class DataService {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + jwt
          });
-        var response = await this.http.get<ContractModel[]>(environment.urlServices + "DataManager/GetContractByTenantId/" + tenantId.toString(), { headers: reqHeader }).toPromise();
+        var response = await this.http.get<ContractModel[]>(environment.urlServices + "DataManager/GetContractsByTenantId/" + tenantId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
+    async getContractById(contractId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.get<ContractModel>(environment.urlServices + "DataManager/GetContractById/" + contractId.toString(), { headers: reqHeader }).toPromise();
         return response;
     }
 

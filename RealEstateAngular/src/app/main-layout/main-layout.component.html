@@ -72,7 +72,13 @@
             </mat-icon>
             <p mat-line> List a property </p>
           </a>
-          <a mat-list-item [routerLink]="['/list-property']" routerLinkActive="active">
+          <a mat-list-item [routerLink]="['/rentals-list']" routerLinkActive="active" *ngIf="isUserLandlord()">
+            <mat-icon mat-list-icon>
+              dashboard
+            </mat-icon>
+            <p mat-line> Contracts </p>
+          </a>
+          <a mat-list-item [routerLink]="['/my-rentals']" routerLinkActive="active" *ngIf="!isUserLandlord()">
             <mat-icon mat-list-icon>
               dashboard
             </mat-icon>

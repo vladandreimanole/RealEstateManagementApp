@@ -5,5 +5,6 @@
         public string? Token { get; set; }
         public string? Email { get; set; }
         public int? userId { get; set; }
+        public int RoleId { get; set; }
     }
 
