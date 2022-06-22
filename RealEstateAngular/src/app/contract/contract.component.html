@@ -106,7 +106,13 @@
     </mat-tab>
 
     <mat-tab label="Bills">
-
+      <div class="control-section" style="width: 80%;margin: auto;">
+        <div class="col-lg-9">
+            <div class="control_wrapper">
+                <ejs-uploader #defaultupload [autoUpload]="true" [buttons]="buttons" id='defaultfileupload' [asyncSettings]='path' multiple=true [dropArea]='dropElement'></ejs-uploader>
+            </div>
+        </div>
+      </div>
     </mat-tab>
   </mat-tab-group>
 
