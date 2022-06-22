@@ -41,8 +41,9 @@ public class ResetPasswordManager : IResetPasswordManager
         return isCorect;
     }
 
-    public async Task SendResetPasswordForUser(string email)
+    public async Task<bool> SendResetPasswordForUser(string email)
     {
+        bool send = false;
         try
         {
             try
@@ -52,7 +53,7 @@ public class ResetPasswordManager : IResetPasswordManager
                 {
                     var message = $"No user found for email {email}";
                     _logger.LogError(message);
-                    throw new Exception(message);
+                    return send;
                 }
 
                 user.PassResetToken = Guid.NewGuid().ToString();
@@ -68,6 +69,7 @@ public class ResetPasswordManager : IResetPasswordManager
             try
             {
                 await SendEmailTo(email);
+                send = true;
             }
             catch (Exception ex)
             {
@@ -81,6 +83,8 @@ public class ResetPasswordManager : IResetPasswordManager
             _logger.LogError(ex, "Failed to reset password");
 
         }
+
+        return send;
     }
 
     public async Task SendEmailTo(string email)

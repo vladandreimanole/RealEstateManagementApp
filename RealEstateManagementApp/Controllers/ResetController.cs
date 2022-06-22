@@ -19,10 +19,10 @@ public class ResetController : Controller
 
     [AllowAnonymous]
     [HttpGet]
-    public async Task SendResetEmail(string email)
+    public async Task<bool> SendResetEmail(string email)
     {
 
-        await _passwordManager.SendResetPasswordForUser(email);
+        return await _passwordManager.SendResetPasswordForUser(email);
     }
 
     [AllowAnonymous]
