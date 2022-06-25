@@ -27,11 +27,11 @@ public class ImageController : ControllerBase
                 {
                     file.CopyTo(ms);
                     var fileBytes = ms.ToArray();
-                    string s = Convert.ToBase64String(fileBytes);
+                    string base64Image = Convert.ToBase64String(fileBytes);
                     UploadedImage img = new()
                     {
                         PropertyId = propertyId,
-                        ImageData = s
+                        ImageData = base64Image
                     };
                     await _dataService.TransferImageToDatabase(img);
                 }

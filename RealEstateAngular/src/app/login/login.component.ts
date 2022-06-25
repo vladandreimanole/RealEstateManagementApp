@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
       this.user.roleId = this.roles.find(x=>x.roleName == this.selectedRole)?.roleId;
       console.log(this.user.roleId);
       var result = this.dataService.createUser(this.user);
+      this.router.navigate(['properties']);
     }
   }
 }
