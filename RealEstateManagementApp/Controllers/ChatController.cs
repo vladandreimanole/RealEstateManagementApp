@@ -13,7 +13,7 @@ namespace RealEstateManagementApp.Controllers
             _dataService = dataService;
         }
 
-        [Route("send")]                                           //path looks like this: https://localhost:44379/api/chat/send
+        [Route("send")]
         [HttpPost]
         public IActionResult SendRequest([FromBody] MessageDto msg)
         {
