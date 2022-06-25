@@ -8,9 +8,11 @@ namespace RealEstateManagementApp.Controllers;
 [Route("api/[controller]/[action]")]
 public class ResetController : Controller
 {
+    private readonly IDataService _dataService;
+
     private readonly IResetPasswordManager _passwordManager;
     private readonly ILogger<ResetController> _logger;
-    public ResetController(IResetPasswordManager passwordManager, ILogger<ResetController> logger)
+    public ResetController(IResetPasswordManager passwordManager, ILogger<ResetController> logger, IDataService dataService)
     {
         _passwordManager = passwordManager;
         _logger= logger;
@@ -26,11 +28,19 @@ public class ResetController : Controller
     }
 
     [AllowAnonymous]
-    [HttpGet]
-    public async Task<bool> VerifyToken(string email, string token)
+    [HttpPost]
+    public async Task<bool> VerifyAndUpdatePass(User user)
     {
 
-        return await _passwordManager.VerifyResetTokenForUser(email,token);
+        var isTokenOk= await _passwordManager.VerifyResetTokenForUser(user?.Email,user?.PassResetToken);
+
+        if (isTokenOk)
+        {
+            await _dataService.UpdateUserAccount(user);
+            return true;
+        }
+        return false;
     }
+
 }
 

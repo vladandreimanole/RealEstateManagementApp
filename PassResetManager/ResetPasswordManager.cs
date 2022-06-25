@@ -29,6 +29,12 @@ public class ResetPasswordManager : IResetPasswordManager
         {
             var user = await _dataService.GetUserByEmail(email);
 
+            if(user is null)
+            {
+                _logger.LogError($"No used identified for {email}");
+                return false;
+            }
+
             isCorect = user.PassResetToken == token ? true : false;
 
         }
