@@ -29,6 +29,12 @@ public class ResetPasswordManager : IResetPasswordManager
         {
             var user = await _dataService.GetUserByEmail(email);
 
+            if(user is null)
+            {
+                _logger.LogError($"No used identified for {email}");
+                return false;
+            }
+
             isCorect = user.PassResetToken == token ? true : false;
 
         }
@@ -89,14 +95,14 @@ public class ResetPasswordManager : IResetPasswordManager
 
     public async Task SendEmailTo(string email)
     {
-        var from = new MailAddress("jo7n2xhdsn45jsruasdasdethereal.email");
+        var from = new MailAddress("lexie.jacobs40@ethereal.email");
         var to = new MailAddress(email);
         var subject = _optionsMonitor.CurrentValue.Subject;
         var body = _optionsMonitor.CurrentValue.Body;
 
         //never to this, never;
-        var username = "asdasdasd";
-        var password = "asdasd";
+        var username = "lexie.jacobs40@ethereal.email";
+        var password = "emCATQxxkXc8SSucEM";
         var host = "smtp.ethereal.email";
         var port = 587;
 

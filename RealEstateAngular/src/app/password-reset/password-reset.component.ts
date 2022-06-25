@@ -14,6 +14,7 @@ export class PasswordResetComponent implements OnInit {
   constructor(private resetService: ResetPasswordService, private _snackBar: MatSnackBar) { }
   user:User = new User();
   isTokenSend:boolean=false;
+  isTokenCorrect:boolean=false;
   ngOnInit(): void {
   }
   reset = ( form: NgForm) => {
@@ -26,8 +27,19 @@ export class PasswordResetComponent implements OnInit {
   {
     if(this.user.email != '')
     {
-      await this.resetService.sendTokenEmail(this.user.email);
-      this.isTokenSend = true;
+      this.resetService.sendTokenEmail(this.user.email).subscribe(values=>{
+        this.isTokenSend = values;
+        
+    if(this.isTokenSend == false)
+    {
+      this._snackBar.open('Could not send reset email. Please contact administrator', 'Close', {
+        horizontalPosition: "right",
+        verticalPosition: "top",
+        duration: 3000
+    })
+    }
+
+      });
     }else{
       this._snackBar.open('Please insert your email', 'Close', {
         horizontalPosition: "right",
@@ -35,16 +47,17 @@ export class PasswordResetComponent implements OnInit {
         duration: 3000
     });
     }
+
   }
 
   public handlePassReset=async (event:any)=>
   {
-    if(this.user.email != '')
-    {
-      await this.resetService.sendTokenEmail(this.user.email);
-      this.isTokenSend = true;
-    }else{
-      this._snackBar.open('Please insert your email', 'Close', {
+      this.resetService.verifyAndUpdatePass(this.user).subscribe(values=>{
+        this.isTokenCorrect = true;
+      });
+    
+    if(this.isTokenCorrect == false){
+      this._snackBar.open('Incorrect token. Try again or send another token', 'Close', {
         horizontalPosition: "right",
         verticalPosition: "top",
         duration: 3000

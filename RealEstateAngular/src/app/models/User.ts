@@ -7,5 +7,5 @@ export class User{
     lastName?:string
     phoneNumber?:string
     roleId?:number;
-    passResetToken?:string='';
+    passResetToken:string='';
 }
