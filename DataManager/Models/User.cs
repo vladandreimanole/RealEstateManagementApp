@@ -7,6 +7,8 @@ namespace DataManager.Models
     {
         public User()
         {
+            ChatLandlords = new HashSet<Chat>();
+            ChatTenants = new HashSet<Chat>();
             Contracts = new HashSet<Contract>();
             Properties = new HashSet<Property>();
         }
@@ -21,8 +23,10 @@ namespace DataManager.Models
         public string? PhoneNumber { get; set; }
         public string? PassResetToken { get; set; }
 
-        public virtual Role? Role { get; set; } = null!;
-        public virtual ICollection<Contract>? Contracts { get; set; }
-        public virtual ICollection<Property>? Properties { get; set; }
+        public virtual Role Role { get; set; } = null!;
+        public virtual ICollection<Chat> ChatLandlords { get; set; }
+        public virtual ICollection<Chat> ChatTenants { get; set; }
+        public virtual ICollection<Contract> Contracts { get; set; }
+        public virtual ICollection<Property> Properties { get; set; }
     }
 }

@@ -19,6 +19,6 @@ namespace DataManager.Models
 
         public virtual User? User { get; set; }
         public virtual Contract? Contract { get; set; }
-        public virtual ICollection<UploadedImage>? UploadedImages { get; set; }
+        public virtual ICollection<UploadedImage> UploadedImages { get; set; }
     }
 }

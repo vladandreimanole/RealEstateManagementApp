@@ -16,6 +16,9 @@ namespace DataManager.Models
         {
         }
 
+        public virtual DbSet<Bill> Bills { get; set; } = null!;
+        public virtual DbSet<Chat> Chats { get; set; } = null!;
+        public virtual DbSet<ChatLog> ChatLogs { get; set; } = null!;
         public virtual DbSet<Contract> Contracts { get; set; } = null!;
         public virtual DbSet<Property> Properties { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
@@ -33,12 +36,41 @@ namespace DataManager.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.UseCollation("SQL_Latin1_General_CP1_CI_AS");
+            modelBuilder.Entity<Bill>(entity =>
+            {
+                entity.HasOne(d => d.Contract)
+                    .WithMany(p => p.Bills)
+                    .HasForeignKey(d => d.ContractId)
+                    .HasConstraintName("FK_Bills_Contracts");
+            });
+
+            modelBuilder.Entity<Chat>(entity =>
+            {
+                entity.HasOne(d => d.Landlord)
+                    .WithMany(p => p.ChatLandlords)
+                    .HasForeignKey(d => d.LandlordId)
+                    .HasConstraintName("FK_Chats_Users1");
+
+                entity.HasOne(d => d.Tenant)
+                    .WithMany(p => p.ChatTenants)
+                    .HasForeignKey(d => d.TenantId)
+                    .HasConstraintName("FK_Chats_Users");
+            });
+
+            modelBuilder.Entity<ChatLog>(entity =>
+            {
+                entity.HasOne(d => d.Chat)
+                    .WithMany(p => p.ChatLogs)
+                    .HasForeignKey(d => d.ChatId)
+                    .HasConstraintName("FK_ChatLogs_Chats");
+            });
 
             modelBuilder.Entity<Contract>(entity =>
             {
                 entity.HasIndex(e => e.PropertyId, "IX_Contracts_1")
                     .IsUnique();
+
+                entity.Property(e => e.ContractHtml).HasColumnName("ContractHTML");
 
                 entity.HasOne(d => d.Property)
                     .WithOne(p => p.Contract)
@@ -83,7 +115,7 @@ namespace DataManager.Models
 
                 entity.Property(e => e.LastName).HasMaxLength(50);
 
-                entity.Property(e => e.PassResetToken).HasMaxLength(255);
+                entity.Property(e => e.PassResetToken).HasMaxLength(50);
 
                 entity.Property(e => e.Password).HasMaxLength(50);
 
