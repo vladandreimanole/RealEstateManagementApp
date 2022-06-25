@@ -16,6 +16,6 @@ namespace DataManager.Models
 
         public virtual User? Landlord { get; set; }
         public virtual User? Tenant { get; set; }
-        public virtual ICollection<ChatLog> ChatLogs { get; set; }
+        public virtual ICollection<ChatLog>? ChatLogs { get; set; }
     }
 }

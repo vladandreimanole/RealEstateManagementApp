@@ -38,6 +38,10 @@
     Task<List<Contract>> GetContractsByLandlordId(int landlordId);
     Task<List<Contract>> GetContractsByTenantId(int tenantId);
     Task<Contract> GetContractById(int contractId);
+    Task<Chat> CreateChat(Chat chat);
+    Task<Chat> GetChat(int tenantId, int landlordId);
+    Task<ChatLog> CreateChatLog(ChatLog chatLog);
+    Task<List<ChatLog>> GetChatLogsByChatId(int chatId);
 
     }
 

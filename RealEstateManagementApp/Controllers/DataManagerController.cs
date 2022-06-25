@@ -63,10 +63,34 @@ public class DataManagerController : Controller
     {
         return await _dataService.GetUploadedImagesByPropertyId(propertyId);
     }
+
+    [HttpGet("{tenantId}/{landlordId}"), Authorize]
+
+    public async Task<Chat> GetChat(int tenantId, int landlordId)
+    {
+        return await _dataService.GetChat(tenantId, landlordId);
+    }
     [HttpGet("{contractId}"), Authorize]
     public async Task<Contract> GetContractById(int contractId)
     {
         return await _dataService.GetContractById(contractId);
+    }
+
+    [HttpGet("{chatId}"), Authorize]
+    public async Task<List<MessageDto>> GetChatLogsByChatId(int chatId)
+    {
+        var items = await _dataService.GetChatLogsByChatId(chatId);
+        var res = (from chatLog in items
+                   select new MessageDto
+                   {
+                        chatId = chatLog.ChatId.ToString(),
+                        landlordId = chatLog.Chat.LandlordId,
+                        tenantId = chatLog.Chat.TenantId,
+                        msgText = chatLog.ChatMessage,
+                        sentTime = chatLog.SentTime,
+                        sentByUserId = chatLog.SentByUserId,
+                   }).ToList();
+        return res;
     }
 
     [HttpGet("{userId}"), Authorize]
@@ -89,6 +113,12 @@ public class DataManagerController : Controller
     {
         //return new Property();
         return await _dataService.CreateProperty(property);
+    }
+
+    [HttpPost, Authorize]
+    public async Task<Chat> CreateChat([FromBody] Chat chat)
+    {
+        return await _dataService.CreateChat(chat);
     }
 
     [HttpPost, Authorize]

@@ -9,6 +9,9 @@ import { PropertyModel } from '../models/Property';
 import { Role } from '../models/Role';
 import { UploadedImages } from '../models/UploadedImages';
 import { ContractModel } from '../models/Contract';
+import { ChatModel } from '../models/Chat';
+import { ChatLogModel } from '../models/ChatLog';
+import { MessageDto } from '../models/MessageDto';
 
 @Injectable({
     providedIn: 'root'
@@ -122,6 +125,24 @@ export class DataService {
             })
     }
 
+
+
+    createChat(chat: ChatModel) {
+        let jwt = localStorage.getItem('jwt');
+        return this.http.post<ChatModel>(environment.urlServices + "DataManager/CreateChat", chat, {
+            headers: new HttpHeaders({ "Content-Type": "application/json", 'Authorization': 'Bearer ' + jwt })
+        })
+            .subscribe({
+                error: (err: HttpErrorResponse) => {
+                    this._snackBar.open('Cannot create chat' + err.message, 'Close', {
+                        horizontalPosition: "right",
+                        verticalPosition: "top",
+                        duration: 3000
+                    });
+                }
+            })
+    }
+
     async getContractByLandlordId(landlordId: number) {
         let jwt = localStorage.getItem('jwt');
         var reqHeader = new HttpHeaders({ 
@@ -149,6 +170,27 @@ export class DataService {
             'Authorization': 'Bearer ' + jwt
          });
         var response = await this.http.get<ContractModel>(environment.urlServices + "DataManager/GetContractById/" + contractId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
+    async getChat(tenantId: number, landlordId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.get<ChatModel>(environment.urlServices + "DataManager/GetChat/" + tenantId.toString() + "/" + landlordId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
+
+    async getChatLogByChatId(chatId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.get<MessageDto[]>(environment.urlServices + "DataManager/GetChatLogsByChatId/" + chatId.toString(), { headers: reqHeader }).toPromise();
         return response;
     }
 

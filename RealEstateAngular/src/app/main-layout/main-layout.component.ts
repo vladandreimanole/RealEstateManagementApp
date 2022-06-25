@@ -40,8 +40,7 @@ export class MainLayoutComponent implements OnInit {
     return false;
   }
   logOut = () => {
-    localStorage.removeItem("jwt");
-    localStorage.removeItem("userEmail");
+    localStorage.clear();
   }
   isUserLandlord(){
     if(localStorage.getItem("roleId") === "1"){

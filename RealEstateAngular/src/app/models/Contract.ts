@@ -8,5 +8,5 @@ export class ContractModel{
     signed?: boolean
     property?: PropertyModel
     tenant?: User
-    contractHTML?: string
+    contractHtml?: string
 }

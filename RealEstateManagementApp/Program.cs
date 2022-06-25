@@ -1,5 +1,6 @@
 
 using PassResetManager;
+using RealEstateManagementApp.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +37,7 @@ builder.Services.AddTransient<IDataService, DataService>();
 builder.Services.AddTransient<IResetPasswordManager, ResetPasswordManager>();
 builder.Services.Configure<AuthentificationOptionsMonitor>(builder.Configuration.GetSection(nameof(AuthentificationOptionsMonitor)));
 builder.Services.Configure<EmailOptionsMonitor>(builder.Configuration.GetSection(nameof(EmailOptionsMonitor)));
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -68,5 +70,6 @@ app.UseAuthorization();
 app.UseEndpoints(endpoints =>
   {
       endpoints.MapControllers();
+      endpoints.MapHub<ChatHub>("/chatsocket");
   });
   app.Run();

@@ -14,5 +14,6 @@ global using System.IdentityModel.Tokens.Jwt;
 global using System.Security.Claims;
 global using System.ComponentModel.DataAnnotations;
 global using RealEstateManagementApp.Models;
-
+global using Microsoft.AspNetCore.SignalR;
+global using RealEstateManagementApp.Hubs;
 
