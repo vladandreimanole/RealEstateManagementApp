@@ -7,6 +7,7 @@ namespace DataManager.Models
     {
         public Property()
         {
+            PropertyVisualizations = new HashSet<PropertyVisualization>();
             UploadedImages = new HashSet<UploadedImage>();
         }
 
@@ -16,9 +17,11 @@ namespace DataManager.Models
         public string? Address { get; set; }
         public long? Value { get; set; }
         public int? UserId { get; set; }
+        public bool? Unlisted { get; set; }
 
         public virtual User? User { get; set; }
         public virtual Contract? Contract { get; set; }
+        public virtual ICollection<PropertyVisualization> PropertyVisualizations { get; set; }
         public virtual ICollection<UploadedImage> UploadedImages { get; set; }
     }
 }

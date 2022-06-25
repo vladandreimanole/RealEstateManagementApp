@@ -42,6 +42,9 @@
     Task<Chat> GetChat(int tenantId, int landlordId);
     Task<ChatLog> CreateChatLog(ChatLog chatLog);
     Task<List<ChatLog>> GetChatLogsByChatId(int chatId);
-
+    Task<Contract> SignContract(int contractId);
+    Task<Property> UnlistProperty(int propertyId);
+    Task<PropertyVisualization> CreateOrUpdatePropertyVisualization(int propertyId);
+    Task<List<PropertyVisualization>> GetPropertyVisualizationsByPropertyId(int propertyId);
     }
 

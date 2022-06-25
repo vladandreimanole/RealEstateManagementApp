@@ -103,7 +103,7 @@ public class DataService : IDataService
         var items = _context.Properties.AsQueryable();
         items = items.Include(i => i.User);
         items = items.Include(i => i.Contract);
-        items = items.Include(i => i.UploadedImages);
+        items = items.Include(i => i.UploadedImages).Where(i => i.Unlisted == false);
         var res = (from property in items
                    select new Property
                    {
@@ -240,8 +240,13 @@ public class DataService : IDataService
 
     public async Task<Contract> GetContractById(int contractId)
     {
-        var test = await _context.Contracts.Where(i => i.ContractId == contractId).FirstOrDefaultAsync();
-        return test;
+        var items = _context.Contracts.Include(i => i.Property).ThenInclude(i => i.User);
+        var contract = items.Include(i => i.Tenant).Where(i => i.ContractId == contractId).FirstOrDefault();
+        contract.ContractHtml.Replace("{{tenantFirstName}}", contract.Tenant.FirstName);
+        contract.ContractHtml.Replace("{{tenantLastName}}", contract.Tenant.LastName);
+        contract.ContractHtml.Replace("{{tenantAddress}}", contract.Tenant.Address);
+        contract.ContractHtml.Replace("{{tenantPhoneNo}}", contract.Tenant.PhoneNumber);
+        return contract;
     }
 
     public Task<Chat> GetChat(int tenantId, int landlordId)
@@ -259,6 +264,52 @@ public class DataService : IDataService
     public Task<List<ChatLog>> GetChatLogsByChatId(int chatId)
     {
         return _context.ChatLogs.Include(i => i.Chat).Where(i => i.ChatId == chatId).ToListAsync();
+    }
+
+    public async Task<Contract> SignContract(int contractId)
+    {
+        var contract = _context.Contracts.Where(i => i.ContractId == contractId).FirstOrDefault();
+        contract.Signed = true;
+        _context.Contracts.Update(contract);
+        await _context.SaveChangesAsync();
+        return contract;
+    }
+
+    public async Task<Property> UnlistProperty(int propertyId)
+    {
+        var property = _context.Properties.Where(i => i.PropertyId == propertyId).FirstOrDefault();
+        property.Unlisted = true;
+        _context.Properties.Update(property);
+        await _context.SaveChangesAsync();
+        return property;
+    }
+
+    public async Task<PropertyVisualization> CreateOrUpdatePropertyVisualization(int propertyId)
+    {
+        var visualization = _context.PropertyVisualizations.Where(i => i.PropertyId == propertyId).FirstOrDefault();
+        if(visualization is null)
+        {
+            visualization = new PropertyVisualization()
+            {
+                Date = DateTime.Now,
+                PropertyId = propertyId,
+                Views = 1
+            };
+            _context.PropertyVisualizations.Add(visualization);
+            await _context.SaveChangesAsync();
+            return visualization;
+        }
+        else
+        {
+            visualization.Views += 1;
+            await _context.SaveChangesAsync();
+            return visualization;
+        }
+    }
+
+    public async Task<List<PropertyVisualization>> GetPropertyVisualizationsByPropertyId(int propertyId)
+    {
+        return await _context.PropertyVisualizations.Where(i => i.PropertyId == propertyId).ToListAsync();
     }
 }
 

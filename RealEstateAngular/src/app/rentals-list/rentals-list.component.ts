@@ -18,4 +18,13 @@ export class RentalsListComponent implements OnInit {
   openContractPage(contractId: number){
     this.router.navigate(["contract/" + contractId.toString()]);
   }
+
+  signContract(contractId: number, propertyId: number){
+    this.dataService.signContract(contractId);
+    this.dataService.unlistProperty(propertyId);
+  }
+
+  deleteContract(contractId: number){
+    this.dataService.deleteContract(contractId);
+  }
 }

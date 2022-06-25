@@ -12,6 +12,7 @@ import { ContractModel } from '../models/Contract';
 import { ChatModel } from '../models/Chat';
 import { ChatLogModel } from '../models/ChatLog';
 import { MessageDto } from '../models/MessageDto';
+import { PropertyVisualization } from '../models/PropertyVisualization';
 
 @Injectable({
     providedIn: 'root'
@@ -125,7 +126,24 @@ export class DataService {
             })
     }
 
-
+    createOrUpdatePropertyVisualization(propertyId: number) {
+        let jwt = localStorage.getItem('jwt');
+        return this.http.post<PropertyVisualization>(environment.urlServices + "DataManager/CreateOrUpdatePropertyVisualization/" + propertyId, {
+            headers: new HttpHeaders({ "Content-Type": "application/json", 'Authorization': 'Bearer ' + jwt })
+        })
+            .subscribe({
+                error: (err: HttpErrorResponse) => {
+                    this._snackBar.open('Cannot create property visualization' + err.message, 'Close', {
+                        horizontalPosition: "right",
+                        verticalPosition: "top",
+                        duration: 3000
+                    });
+                }
+            })
+    }
+    deleteContract(contractId: number){
+        
+    }
 
     createChat(chat: ChatModel) {
         let jwt = localStorage.getItem('jwt');
@@ -163,6 +181,16 @@ export class DataService {
         return response;
     }
 
+    async getPropertyVisualizationsByPropertyId(propertyId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.get<PropertyVisualization[]>(environment.urlServices + "DataManagerGgetPropertyVisualizationsByPropertyId/" + propertyId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
     async getContractById(contractId: number) {
         let jwt = localStorage.getItem('jwt');
         var reqHeader = new HttpHeaders({ 
@@ -191,6 +219,26 @@ export class DataService {
             'Authorization': 'Bearer ' + jwt
          });
         var response = await this.http.get<MessageDto[]>(environment.urlServices + "DataManager/GetChatLogsByChatId/" + chatId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
+    async signContract(contractId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.put<ContractModel>(environment.urlServices + "DataManager/SignContract/" + contractId.toString(), { headers: reqHeader }).toPromise();
+        return response;
+    }
+
+    async unlistProperty(propertyId: number) {
+        let jwt = localStorage.getItem('jwt');
+        var reqHeader = new HttpHeaders({ 
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+         });
+        var response = await this.http.put<PropertyModel>(environment.urlServices + "DataManager/UnlistProperty/" + propertyId.toString(), { headers: reqHeader }).toPromise();
         return response;
     }
 

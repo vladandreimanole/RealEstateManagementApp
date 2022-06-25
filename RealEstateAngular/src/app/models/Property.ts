@@ -9,5 +9,6 @@ export class PropertyModel {
     value?: number
     userId?: number
     user?: User
+    unlisted?: boolean = false
     uploadedImages?: UploadedImages[]
   }

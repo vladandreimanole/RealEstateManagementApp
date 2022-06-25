@@ -150,6 +150,32 @@ public class DataManagerController : Controller
         return await _dataService.DeleteContract(contractId);
     }
 
+    [HttpPut("{contractId}"), Authorize]
+
+    public async Task<Contract> SignContract(int contractId)
+    {
+        return await _dataService.SignContract(contractId);
+    }
+    [HttpPut("{propertyId}"), Authorize]
+
+    public async Task<Property> UnlistProperty(int propertyId)
+    {
+        return await _dataService.UnlistProperty(propertyId);
+    }
+
+    [HttpPost("{propertyId}"), Authorize]
+
+    public async Task<PropertyVisualization> CreateOrUpdatePropertyVisualization(int propertyId)
+    {
+        return await _dataService.CreateOrUpdatePropertyVisualization(propertyId);
+    }
+
+    [HttpGet("{propertyId}"), Authorize]
+
+    public async Task<List<PropertyVisualization>> GetPropertyVisualizationsByPropertyId(int propertyId)
+    {
+        return await _dataService.GetPropertyVisualizationsByPropertyId(propertyId);
+    }
 
 }
 

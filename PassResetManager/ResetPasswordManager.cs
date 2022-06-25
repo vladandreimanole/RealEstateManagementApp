@@ -95,15 +95,15 @@ public class ResetPasswordManager : IResetPasswordManager
 
     public async Task SendEmailTo(string email)
     {
-        var from = new MailAddress("realestatemanagement2@mail.com");
+        var from = new MailAddress("tyrel.kertzmann67@ethereal.email");
         var to = new MailAddress(email);
         var subject = _optionsMonitor.CurrentValue.Subject;
         var body = _optionsMonitor.CurrentValue.Body;
 
         //never to this, never;
-        var username = "realestatemanagement2@mail.com";
-        var password = "ParolaMea123!@#";
-        var host = "smtp-relay.sendinblue.com";
+        var username = "tyrel.kertzmann67@ethereal.email";
+        var password = "fVvrSURx2kWHpRDKep";
+        var host = "smtp.ethereal.email";
         var port = 587;
 
         var client = new SmtpClient(host, port);

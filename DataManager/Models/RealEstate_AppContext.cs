@@ -21,6 +21,7 @@ namespace DataManager.Models
         public virtual DbSet<ChatLog> ChatLogs { get; set; } = null!;
         public virtual DbSet<Contract> Contracts { get; set; } = null!;
         public virtual DbSet<Property> Properties { get; set; } = null!;
+        public virtual DbSet<PropertyVisualization> PropertyVisualizations { get; set; } = null!;
         public virtual DbSet<Role> Roles { get; set; } = null!;
         public virtual DbSet<UploadedImage> UploadedImages { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
@@ -59,6 +60,8 @@ namespace DataManager.Models
 
             modelBuilder.Entity<ChatLog>(entity =>
             {
+                entity.Property(e => e.SentTime).HasColumnType("datetime");
+
                 entity.HasOne(d => d.Chat)
                     .WithMany(p => p.ChatLogs)
                     .HasForeignKey(d => d.ChatId)
@@ -89,6 +92,18 @@ namespace DataManager.Models
                     .WithMany(p => p.Properties)
                     .HasForeignKey(d => d.UserId)
                     .HasConstraintName("FK_Properties_Users");
+            });
+
+            modelBuilder.Entity<PropertyVisualization>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Date).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Property)
+                    .WithMany(p => p.PropertyVisualizations)
+                    .HasForeignKey(d => d.PropertyId)
+                    .HasConstraintName("FK_PropertyVisualizations_Properties");
             });
 
             modelBuilder.Entity<Role>(entity =>

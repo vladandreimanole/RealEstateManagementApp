@@ -15,7 +15,7 @@
         <div class="col col-4">Signed</div>
         <div class="col col-5">Tools</div>
       </li>
-      <li class="table-row" *ngFor="let contract of contracts" (click)="openContractPage(contract.contractId!)">
+      <li class="table-row" *ngFor="let contract of contracts">
         <div class="col col-1" data-label="Address">{{contract.property?.address}}</div>
         <div class="col col-2" data-label="Name">{{contract.tenant?.firstName + " " + contract.tenant?.lastName}}</div>
         <div class="col col-3" data-label="Phone">{{contract.tenant?.phoneNumber}}</div>
@@ -23,10 +23,10 @@
         <div class="col col-4" data-label="Signed" *ngIf="!contract.signed">No</div>
         <div class="col col-5" data-label="Tools">
             <div style="display: flex; justify-content: space-between;flex-wrap: wrap;">
-                  <button mat-icon-button color="accent" style="color:#3f51b5;">
+                  <button mat-icon-button color="accent" style="color:#3f51b5;" (click)="signContract(contract.contractId!, contract.propertyId!)">
                     <mat-icon>done_outline</mat-icon>
                   </button>
-                  <button mat-icon-button color="accent" style="color:black">
+                  <button mat-icon-button color="accent" style="color:black" (click)="openContractPage(contract.contractId!)">
                     <mat-icon>remove_red_eye</mat-icon>
                   </button>
                   <button mat-icon-button color="accent">
