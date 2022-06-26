@@ -187,7 +187,7 @@ export class DataService {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + jwt
          });
-        var response = await this.http.get<PropertyVisualization[]>(environment.urlServices + "DataManagerGgetPropertyVisualizationsByPropertyId/" + propertyId.toString(), { headers: reqHeader }).toPromise();
+        var response = await this.http.get<PropertyVisualization[]>(environment.urlServices + "DataManager/GetPropertyVisualizationsByPropertyId/" + propertyId.toString(), { headers: reqHeader }).toPromise();
         return response;
     }
 

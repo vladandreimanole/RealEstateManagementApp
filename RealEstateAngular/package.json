@@ -24,6 +24,7 @@
     "@microsoft/signalr": "^6.0.6",
     "@schematics/angular": "^14.0.1",
     "@syncfusion/ej2-angular-buttons": "^20.1.55",
+    "@syncfusion/ej2-angular-charts": "^20.1.61",
     "@syncfusion/ej2-angular-grids": "^20.1.59",
     "@syncfusion/ej2-angular-inputs": "^20.1.59",
     "@syncfusion/ej2-angular-navigations": "^20.1.60",

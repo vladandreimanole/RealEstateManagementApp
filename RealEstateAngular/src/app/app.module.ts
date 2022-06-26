@@ -27,6 +27,8 @@ import { PasswordResetComponent } from './password-reset/password-reset.componen
 import { TenantRentalsComponent } from './tenant-rentals/tenant-rentals.component';
 import { ContractComponent } from './contract/contract.component';
 import { RichTextEditorAllModule } from '@syncfusion/ej2-angular-richtexteditor';
+import { ChartAllModule } from '@syncfusion/ej2-angular-charts';
+import { DateTimeService, LineSeriesService, DateTimeCategoryService, StripLineService} from '@syncfusion/ej2-angular-charts';
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
@@ -69,9 +71,10 @@ export function tokenGetter() {
     CarouselModule,
     DialogModule,
     MatButtonModule,
-    RichTextEditorAllModule
+    RichTextEditorAllModule,
+    ChartAllModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, DateTimeService, LineSeriesService, DateTimeCategoryService, StripLineService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

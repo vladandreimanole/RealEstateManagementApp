@@ -286,12 +286,12 @@ public class DataService : IDataService
 
     public async Task<PropertyVisualization> CreateOrUpdatePropertyVisualization(int propertyId)
     {
-        var visualization = _context.PropertyVisualizations.Where(i => i.PropertyId == propertyId).FirstOrDefault();
+        var visualization = _context.PropertyVisualizations.Where(i => i.PropertyId == propertyId && DateTime.Compare((DateTime)i.Date, DateTime.Now.Date) == 0).FirstOrDefault();
         if(visualization is null)
         {
             visualization = new PropertyVisualization()
             {
-                Date = DateTime.Now,
+                Date = DateTime.Now.Date,
                 PropertyId = propertyId,
                 Views = 1
             };

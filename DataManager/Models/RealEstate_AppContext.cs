@@ -96,8 +96,6 @@ namespace DataManager.Models
 
             modelBuilder.Entity<PropertyVisualization>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.Date).HasColumnType("datetime");
 
                 entity.HasOne(d => d.Property)
