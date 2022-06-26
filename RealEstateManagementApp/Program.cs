@@ -1,6 +1,5 @@
 
-using PassResetManager;
-using RealEstateManagementApp.Hubs;
+using RealEstateManagementApp.Jobs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +37,7 @@ builder.Services.AddTransient<IResetPasswordManager, ResetPasswordManager>();
 builder.Services.Configure<AuthentificationOptionsMonitor>(builder.Configuration.GetSection(nameof(AuthentificationOptionsMonitor)));
 builder.Services.Configure<EmailOptionsMonitor>(builder.Configuration.GetSection(nameof(EmailOptionsMonitor)));
 builder.Services.AddSignalR();
+builder.Services.AddHostedService<RentReminderJob>();
 
 var app = builder.Build();
 

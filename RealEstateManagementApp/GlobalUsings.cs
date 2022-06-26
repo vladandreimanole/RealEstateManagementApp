@@ -16,4 +16,4 @@ global using System.ComponentModel.DataAnnotations;
 global using RealEstateManagementApp.Models;
 global using Microsoft.AspNetCore.SignalR;
 global using RealEstateManagementApp.Hubs;
-
+global using PassResetManager;
