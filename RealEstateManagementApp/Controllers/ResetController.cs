@@ -16,6 +16,7 @@ public class ResetController : Controller
     {
         _passwordManager = passwordManager;
         _logger= logger;
+        _dataService= dataService;
     }
 
 

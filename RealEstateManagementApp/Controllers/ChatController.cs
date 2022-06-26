@@ -19,13 +19,13 @@ namespace RealEstateManagementApp.Controllers
         {
             var chatMessage = new ChatLog
             {
-                ChatId = Int32.Parse(msg.chatId),
-                ChatMessage = msg.msgText,
-                SentTime = (DateTime)msg.sentTime,
-                SentByUserId = msg.sentByUserId
+                ChatId = Convert.ToInt32(msg?.chatId),
+                ChatMessage = msg?.msgText,
+                SentTime = (DateTime)msg?.sentTime,
+                SentByUserId = msg?.sentByUserId
             };
             _dataService.CreateChatLog(chatMessage);
-            _hubContext.Clients.Group(msg.chatId).SendAsync("ReceiveOne", msg.sentByUserId, msg.msgText);
+            _hubContext.Clients.Group(msg?.chatId).SendAsync("ReceiveOne", msg.sentByUserId, msg.msgText);
             return Ok();
         }
 
