@@ -111,7 +111,7 @@ public class DataManagerController : Controller
     [HttpPost, Authorize]
     public async Task<Property> CreateProperty([FromBody] Property property)
     {
-        //return new Property();
+        
         return await _dataService.CreateProperty(property);
     }
 
@@ -124,7 +124,6 @@ public class DataManagerController : Controller
     [HttpPost, Authorize]
     public async Task<Contract> CreateContract([FromBody] Contract contract)
     {
-        //return new Property();
         return await _dataService.CreateContract(contract);
     }
 
