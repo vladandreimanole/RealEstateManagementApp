@@ -9,7 +9,7 @@
     Task<User> DeleteUserAccount(int userId);
 
     Task<User> UpdateUserAccount(User user);
-
+    Task<List<Contract>> GetContractsForVerify();
     Task<Property> CreateProperty(Property property);
 
     Task<Property> DeleteProperty(int propertyId);

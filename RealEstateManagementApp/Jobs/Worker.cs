@@ -22,20 +22,22 @@ public class Worker : IWorker
             {
                 if (DateTime.Now.Day == 1 && DateTime.Now.Hour == 12)
                 {
-                        var users = await _dataService.GetUsers();
-                        var contracts = await _dataService.GetContracts();
-                        foreach (var contract in contracts)
+                    var signeCcontracts = await _dataService.GetContractsForVerify();
+                    foreach (var contract in signeCcontracts)
+                    {
+
+                        List<Attachment> attachments = new List<Attachment>();
+                        foreach (var bill in contract.Bills)
                         {
-                            List<Attachment> attachments = new List<Attachment>();
-                            foreach (var bill in contract.Bills)
-                            {
-                                var pdfBytes = Convert.FromBase64String(bill?.BillPdf);
-                                var stream = new MemoryStream(pdfBytes);
-                                attachments.Add(new Attachment(stream, "Bill"));
-                            }
-                            await SendEmailTo(users.Where(i=>i.UserId == contract.Tenant.UserId).Select(x=>x.Email).FirstOrDefault("manole.vlad@yahoo.com"), attachments);
+                            var pdfBytes = Convert.FromBase64String(bill?.BillPdf);
+                            var stream = new MemoryStream(pdfBytes);
+                            attachments.Add(new Attachment(stream, "Bill"));
                         }
-                    
+                        await SendEmailTo(contract?.Tenant?.Email, attachments);
+
+
+                    }
+
                     await Task.Delay(7200000);
                 }
                 else
@@ -45,7 +47,7 @@ public class Worker : IWorker
                 }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Exception occured while trying to verify bills");
             }
