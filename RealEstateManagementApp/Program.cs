@@ -31,6 +31,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "RealEstateApi", Version = "v1" });
 });
 builder.Services.AddCors();
+builder.Services.AddSingleton<IWorker, Worker>();
 builder.Services.AddDbContext<RealEstate_AppContext>();
 builder.Services.AddTransient<IDataService, DataService>();
 builder.Services.AddTransient<IResetPasswordManager, ResetPasswordManager>();

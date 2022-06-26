@@ -90,7 +90,7 @@ public class DataService : IDataService
 
     public async Task<List<Contract>> GetContracts()
     {
-        return await _context.Contracts.ToListAsync();
+        return await _context.Contracts.Include(i => i.Tenant).Include(i => i.Bills).Where(i => i.Signed == true).ToListAsync();
     }
 
     public async Task<List<Role>> GetCurrentRoles()

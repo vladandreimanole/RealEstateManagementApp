@@ -1,73 +1,27 @@
 ﻿
+namespace RealEstateManagementApp.Jobs;
 
-using Microsoft.AspNetCore.Components;
-using System.Net;
-using System.Net.Mail;
-
-namespace RealEstateManagementApp.Jobs
-{
-    public class RentReminderJob : BackgroundService
+    public class RentReminderJob : IHostedService
     {
-        protected override async Task ExecuteAsync(CancellationToken token)
-        {
-            await Task.Yield();
+        private ILogger<RentReminderJob> _logger;
+        private IWorker _worker;
 
-            while (token.IsCancellationRequested == false)
-            {
-                if (DateTime.Now.Day == 1 && DateTime.Now.Hour == 12)
-                {
-                    using(var context = new RealEstate_AppContext())
-                    {
-                        var contracts = context.Contracts.Include(i => i.Tenant).Include(i => i.Bills).Where(i => i.Signed == true);
-                        foreach (var contract in contracts)
-                        {
-                            List<Attachment> attachments = new List<Attachment>();
-                            foreach(var bill in contract.Bills)
-                            {
-                                var pdfBytes = Convert.FromBase64String(bill.BillPdf);
-                                var stream = new MemoryStream(pdfBytes);
-                                attachments.Add(new Attachment(stream, "Bill"));
-                            }
-                            await SendEmailTo("manole.vlad@yahoo.com", attachments);
-                        }
-                    }
-                    await Task.Delay(7200000, token);
-                }
-                else
-                {
-                    await Task.Delay(3000, token);
-                }
-            }
+        public RentReminderJob(ILogger<RentReminderJob> logger, IWorker worker)
+        {
+            _logger = logger;
+            _worker = worker;
         }
 
-        public async Task SendEmailTo(string email, List<Attachment> attachments)
+        public async Task StartAsync(CancellationToken cancelToken)
         {
-            var from = new MailAddress("realestateapp@vladm.ro");
-            var to = new MailAddress(email);
-            var subject = "Reminder";
-            var body = "Factura";
+            _ = _worker.DoWork(cancelToken);
+        }
 
-            //never to this, never;
-            var username = "postmaster@sandboxe55a00e3715447e28865a5f436b2f764.mailgun.org";
-            var password = "f4dc95d989341ac97bd814b56ef47c92-4f207195-a76429d6";
-            var host = "smtp.mailgun.org";
-            var port = 587;
-
-            var client = new SmtpClient(host, port);
-            client.Credentials = new NetworkCredential(username, password);
-            client.EnableSsl = true;
-            var mail = new MailMessage();
-            mail.Subject = subject;
-            mail.From = from;
-            mail.To.Add(to);
-            mail.Body = body;
-            mail.IsBodyHtml = true;
-            foreach(var attachment in attachments)
-            {
-                mail.Attachments.Add(attachment);
-            }
-            await client.SendMailAsync(mail);
+        public Task StopAsync(CancellationToken cancelToken)
+        {
+            _logger.LogWarning("RentReminderJob is stopping....");
+            return Task.CompletedTask;
         }
 
     }
-}
+
