@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataManager\DataManager.csproj" />
+    <ProjectReference Include="..\EmailSender\EmailSender.csproj" />
   </ItemGroup>
 
 </Project>

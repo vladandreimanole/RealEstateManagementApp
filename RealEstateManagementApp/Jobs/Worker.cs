@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using EmailSender;
+using System.Net;
 using System.Net.Mail;
 
 namespace RealEstateManagementApp.Jobs;
@@ -7,10 +8,12 @@ public class Worker : IWorker
 {
     private readonly ILogger<Worker> _logger;
     private readonly IDataService _dataService;
-    public Worker(ILogger<Worker> logger, IDataService dataService)
+    private readonly IEmailSender _emailSender;
+    public Worker(ILogger<Worker> logger, IDataService dataService, IEmailSender emailSender)
     {
         _logger = logger;
         _dataService = dataService;
+        _emailSender = emailSender;
     }
 
     public async Task DoWork(CancellationToken cancelToken)
@@ -33,7 +36,7 @@ public class Worker : IWorker
                             var stream = new MemoryStream(pdfBytes);
                             attachments.Add(new Attachment(stream, "Bill"));
                         }
-                        await SendEmailTo(contract?.Tenant?.Email, attachments);
+                        await _emailSender.SendEmailTo(contract?.Tenant?.Email, "Reminder","Body", attachments);
 
 
                     }
@@ -52,35 +55,6 @@ public class Worker : IWorker
                 _logger.LogError(ex, "Exception occured while trying to verify bills");
             }
         }
-    }
-
-    public async Task SendEmailTo(string email, List<Attachment> attachments)
-    {
-        var from = new MailAddress("realestateapp@vladm.ro");
-        var to = new MailAddress(email);
-        var subject = "Reminder";
-        var body = "Factura";
-
-        //never to this, never;
-        var username = "postmaster@sandboxe55a00e3715447e28865a5f436b2f764.mailgun.org";
-        var password = "f4dc95d989341ac97bd814b56ef47c92-4f207195-a76429d6";
-        var host = "smtp.mailgun.org";
-        var port = 587;
-
-        var client = new SmtpClient(host, port);
-        client.Credentials = new NetworkCredential(username, password);
-        client.EnableSsl = true;
-        var mail = new MailMessage();
-        mail.Subject = subject;
-        mail.From = from;
-        mail.To.Add(to);
-        mail.Body = body;
-        mail.IsBodyHtml = true;
-        foreach (var attachment in attachments)
-        {
-            mail.Attachments.Add(attachment);
-        }
-        await client.SendMailAsync(mail);
     }
 }
 

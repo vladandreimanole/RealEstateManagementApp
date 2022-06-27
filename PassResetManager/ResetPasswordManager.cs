@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System.Net.Mail;
 using System.Net;
 using Microsoft.Extensions.Options;
+using EmailSender;
 
 namespace PassResetManager;
 
@@ -13,13 +14,15 @@ public class ResetPasswordManager : IResetPasswordManager
 
     private readonly IDataService _dataService;
     private readonly IOptionsMonitor<EmailOptionsMonitor> _optionsMonitor;
+    private readonly IEmailSender _emailSender;
 
 
-    public ResetPasswordManager(ILogger<ResetPasswordManager> logger, IDataService dataService, IOptionsMonitor<EmailOptionsMonitor> optionsMonitor)
+    public ResetPasswordManager(ILogger<ResetPasswordManager> logger, IDataService dataService, IOptionsMonitor<EmailOptionsMonitor> optionsMonitor, IEmailSender emailSender)
     {
         _logger = logger;
         _dataService = dataService;
         _optionsMonitor = optionsMonitor;
+        _emailSender = emailSender;
     }
 
     public async Task<bool> VerifyResetTokenForUser(string email, string token)
@@ -74,7 +77,7 @@ public class ResetPasswordManager : IResetPasswordManager
 
             try
             {
-                await SendEmailTo(email);
+                await _emailSender.SendEmailTo(email, _optionsMonitor.CurrentValue.Subject, _optionsMonitor.CurrentValue.Body);
                 send = true;
             }
             catch (Exception ex)
@@ -92,32 +95,5 @@ public class ResetPasswordManager : IResetPasswordManager
 
         return send;
     }
-
-    public async Task SendEmailTo(string email)
-    {
-        var from = new MailAddress("realestateapp@vladm.ro");
-        var to = new MailAddress(email);
-        var subject = _optionsMonitor.CurrentValue.Subject;
-        var body = _optionsMonitor.CurrentValue.Body;
-
-        //never to this, never;
-        var username = "postmaster@sandboxe55a00e3715447e28865a5f436b2f764.mailgun.org";
-        var password = "f4dc95d989341ac97bd814b56ef47c92-4f207195-a76429d6";
-        var host = "smtp.mailgun.org";
-        var port = 587;
-
-        var client = new SmtpClient(host, port);
-        client.Credentials = new NetworkCredential(username, password);
-        client.EnableSsl = true;
-        var mail = new MailMessage();
-        mail.Subject = subject;
-        mail.From = from;
-        mail.To.Add(to);
-        mail.Body = body;
-        mail.IsBodyHtml = true;
-
-        await client.SendMailAsync(mail);
-    }
-
 }
 

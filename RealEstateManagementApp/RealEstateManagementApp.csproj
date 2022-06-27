@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DataManager\DataManager.csproj" />
+    <ProjectReference Include="..\EmailSender\EmailSender.csproj" />
     <ProjectReference Include="..\PassResetManager\PassResetManager.csproj" />
   </ItemGroup>
 
