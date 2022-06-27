@@ -1,4 +1,5 @@
 
+using EmailSender;
 using RealEstateManagementApp.Jobs;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +32,7 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "RealEstateApi", Version = "v1" });
 });
 builder.Services.AddCors();
+builder.Services.AddTransient<IEmailSender, EmailSenderClass>();
 builder.Services.AddSingleton<IWorker, Worker>();
 builder.Services.AddDbContext<RealEstate_AppContext>();
 builder.Services.AddTransient<IDataService, DataService>();
