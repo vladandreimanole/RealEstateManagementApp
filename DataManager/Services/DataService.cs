@@ -316,5 +316,10 @@ public class DataService : IDataService
     {
         return await _context.PropertyVisualizations.Where(i => i.PropertyId == propertyId).ToListAsync();
     }
+
+    public void Dispose()
+    {
+        _context.Dispose();
+    }
 }
 

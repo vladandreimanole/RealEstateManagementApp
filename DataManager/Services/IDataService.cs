@@ -1,6 +1,6 @@
 ﻿namespace DataManager.Services;
 
-    public interface IDataService
+    public interface IDataService : IDisposable
     {
     Task<List<User>> GetUsers();
 
