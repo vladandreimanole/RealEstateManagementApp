@@ -15,7 +15,7 @@ public class EmailSenderClass : IEmailSender
 
         //never to this, never;
         var username = "postmaster@sandboxe55a00e3715447e28865a5f436b2f764.mailgun.org";
-        var password = "f4dc95d989341ac97bd814b56ef47c92-4f207195-a76429d6";
+        var password = "asfasfasdasd";
         var host = "smtp.mailgun.org";
         var port = 587;
 
