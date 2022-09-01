@@ -34,6 +34,22 @@ export class DataService {
             })
     }
 
+    deleteContract(contractId: Number) {
+        let jwt = localStorage.getItem('jwt');
+        return this.http.delete<ContractModel>(environment.urlServices + "DataManager/DeleteContract" + "/" + contractId.toString(),
+        {
+            headers: new HttpHeaders({ "Content-Type": "application/json", 'Authorization': 'Bearer ' + jwt })
+        })
+            .subscribe({
+                error: (err: HttpErrorResponse) => {
+                    this._snackBar.open('Cannot delete contract' + err.message, 'Close', {
+                        horizontalPosition: "right",
+                        verticalPosition: "top",
+                        duration: 3000
+                    });
+                }
+            })
+    }
      public GetActiveRoles() : Observable<Role[]>{
         const url = environment.urlServices + 'DataManager/GetCurrentRoles';
         return this.http.get<Role[]>(url);
@@ -141,9 +157,7 @@ export class DataService {
                 }
             })
     }
-    deleteContract(contractId: number){
-        
-    }
+
 
     createChat(chat: ChatModel) {
         let jwt = localStorage.getItem('jwt');

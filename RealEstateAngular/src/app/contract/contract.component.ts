@@ -64,7 +64,10 @@ export class ContractComponent implements OnInit {
     }
     this.chatService.addUserToGroup(this.chat?.chatId.toString()!);
     this.chatService.retrieveMappedObject().subscribe((receivedObj: MessageDto) => 
-    { this.addToInbox(receivedObj); });
+    { let currentMsg = new MessageDto();
+      currentMsg.msgText = receivedObj.msgText;
+      currentMsg.sentByUserId = receivedObj.sentByUserId;
+      this.addToInbox(currentMsg); });
   }
   public handleFullScreen(e: any): void {
     const sbCntEle: HTMLElement = document.querySelector('.sb-content.e-view')!;
@@ -88,8 +91,8 @@ export class ContractComponent implements OnInit {
   }
 
   public path: Object = {
-    saveUrl: 'https://ej2.syncfusion.com/services/api/uploadbox/Save',
-    removeUrl: 'https://ej2.syncfusion.com/services/api/uploadbox/Remove'
+    saveUrl: 'https://localhost:7243/api/Image/SavePdf/' + this._Activatedroute.snapshot.params["contractId"],
+    removeUrl: 'https://localhost:7243/api/Auth/Remove'
   };
   public buttons = { browse: "Alege pdf" };
   public dropElement!: HTMLElement;

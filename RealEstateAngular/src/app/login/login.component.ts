@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 
   public roles:Role[]=[];
   public selectedRole='';
+  public tabIndex = 0;
   invalidLogin: boolean | undefined;
   credentials: LoginModel = {email:'', password:''};
   user:User = new User();
@@ -48,7 +49,7 @@ export class LoginComponent implements OnInit {
       this.user.roleId = this.roles.find(x=>x.roleName == this.selectedRole)?.roleId;
       console.log(this.user.roleId);
       var result = this.dataService.createUser(this.user);
-      this.router.navigate(['properties']);
+      this.tabIndex = 0;
     }
   }
 }

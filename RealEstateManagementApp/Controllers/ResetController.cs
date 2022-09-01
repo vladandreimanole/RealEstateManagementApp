@@ -34,10 +34,12 @@ public class ResetController : Controller
     {
 
         var isTokenOk= await _passwordManager.VerifyResetTokenForUser(user?.Email,user?.PassResetToken);
+        var fullUserData = await _dataService.GetUserByEmail(user.Email);
 
         if (isTokenOk)
         {
-            await _dataService.UpdateUserAccount(user);
+            fullUserData.Password = user.Password;
+            await _dataService.UpdateUserAccount(fullUserData);
             return true;
         }
         return false;

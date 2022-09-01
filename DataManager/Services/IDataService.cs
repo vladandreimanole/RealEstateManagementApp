@@ -1,6 +1,6 @@
 ﻿namespace DataManager.Services;
 
-    public interface IDataService : IDisposable
+    public interface IDataService
     {
     Task<List<User>> GetUsers();
 
@@ -31,6 +31,7 @@
     Task<User> GetUserById(int userId);
 
     Task<UploadedImage> TransferImageToDatabase(UploadedImage uploadedImage);
+    Task<Bill> TransferPdfToDatabase(Bill pdf);
     Task<Property> GetPropertyById(int propertyId);
     Task<List<UploadedImage>> GetUploadedImagesByPropertyId(int propertyId);
 

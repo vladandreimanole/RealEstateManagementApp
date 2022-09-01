@@ -26,5 +26,6 @@ export class RentalsListComponent implements OnInit {
 
   deleteContract(contractId: number){
     this.dataService.deleteContract(contractId);
+    this.contracts = this.contracts.filter(contract => contract.contractId != contractId);
   }
 }

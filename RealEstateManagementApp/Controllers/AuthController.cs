@@ -9,11 +9,13 @@ public class AuthController : ControllerBase
     private readonly ILogger<AuthController> _logger;
 
     private readonly IOptionsMonitor<AuthentificationOptionsMonitor> _optionsMonitor;
-    public AuthController(IDataService dataService, ILogger<AuthController> logger, IOptionsMonitor<AuthentificationOptionsMonitor> optionsMonitor)
+    private readonly IOptionsMonitor<PasswordOptionsMonitor> _passwordOptionsMonitor;
+    public AuthController(IDataService dataService, ILogger<AuthController> logger, IOptionsMonitor<AuthentificationOptionsMonitor> optionsMonitor, IOptionsMonitor<PasswordOptionsMonitor> passwordOptionsMonitor)
     {
         _logger = logger;
         _dataService = dataService;
         _optionsMonitor = optionsMonitor;
+        _passwordOptionsMonitor = passwordOptionsMonitor;
     }
     [HttpPost("login")]
     public IActionResult Login(AuthenticateRequest model)
@@ -29,7 +31,8 @@ public class AuthController : ControllerBase
         {
             return BadRequest("Account does not exist");
         }
-        if (String.Equals(model.email, realUserFromDb.Email) && String.Equals(model.password, realUserFromDb.Password))
+        var hashedEnteredPass = PasswordHelper.HashPassword(model.password, _passwordOptionsMonitor.CurrentValue.PasswordSalt);
+        if (String.Equals(model.email, realUserFromDb.Email) && hashedEnteredPass == realUserFromDb.Password)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_optionsMonitor.CurrentValue.JwtToken));
             var signinCredentials = new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);

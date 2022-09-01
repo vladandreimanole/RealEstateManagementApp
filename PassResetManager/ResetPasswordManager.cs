@@ -53,6 +53,7 @@ public class ResetPasswordManager : IResetPasswordManager
     public async Task<bool> SendResetPasswordForUser(string email)
     {
         bool send = false;
+        string resetToken = Guid.NewGuid().ToString();
         try
         {
             try
@@ -65,7 +66,7 @@ public class ResetPasswordManager : IResetPasswordManager
                     return send;
                 }
 
-                user.PassResetToken = Guid.NewGuid().ToString();
+                user.PassResetToken = resetToken;
 
                 var updatedUser = await _dataService.UpdateUserAccount(user);
 
@@ -77,7 +78,7 @@ public class ResetPasswordManager : IResetPasswordManager
 
             try
             {
-                await _emailSender.SendEmailTo(email, _optionsMonitor.CurrentValue.Subject, _optionsMonitor.CurrentValue.Body);
+                await _emailSender.SendEmailTo(email, _optionsMonitor.CurrentValue.Subject, _optionsMonitor.CurrentValue.Body + resetToken);
                 send = true;
             }
             catch (Exception ex)

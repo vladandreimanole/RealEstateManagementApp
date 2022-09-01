@@ -40,6 +40,7 @@ export class ChatService {
   private mapReceivedMessage(user: string, message: string, chatId: string): void {
     this.receivedMessageObject.sentByUserId = Number(user);
     this.receivedMessageObject.msgText = message;
+    this.receivedMessageObject.chatId = chatId;
     this.sharedObj.next(this.receivedMessageObject);
  }
 

@@ -1,6 +1,6 @@
   <div class="login-page">
     <mat-card class="mat-elevation-z12">
-      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+      <mat-tab-group mat-stretch-tabs class="example-stretched-tabs" [(selectedIndex)]="tabIndex">
         <mat-tab label="Sign In">
             <mat-card-content>
               <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">

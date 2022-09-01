@@ -8,15 +8,15 @@ public class EmailSenderClass : IEmailSender
 {
     public async Task SendEmailTo(string email, string Subject, string Body, List<Attachment> attachments = null)
     {
-        var from = new MailAddress("realestateapp@vladm.ro");
+        var from = new MailAddress("");
         var to = new MailAddress(email);
         var subject = Subject;
         var body = Body;
 
         //never to this, never;
-        var username = "postmaster@sandboxe55a00e3715447e28865a5f436b2f764.mailgun.org";
-        var password = "f4dc95d989341ac97bd814b56ef47c92-4f207195-a76429d6";
-        var host = "smtp.mailgun.org";
+        var username = "";
+        var password = "";
+        var host = "";
         var port = 587;
 
         var client = new SmtpClient(host, port);
@@ -34,7 +34,6 @@ public class EmailSenderClass : IEmailSender
             {
                 mail.Attachments.Add(attachment);
             }
-
         }
 
         await client.SendMailAsync(mail);

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PassResetManager;
 
@@ -10,10 +11,13 @@ public class DataManagerController : Controller
 {
     private readonly IDataService _dataService;
     private readonly ILogger<DataManagerController> _logger;
-    public DataManagerController(IDataService dataService, ILogger<DataManagerController> logger)
+    private readonly IPasswordHasher<PasswordHasher> _passwordHasher;
+    private readonly IOptionsMonitor<PasswordOptionsMonitor> _optionsMonitor;
+    public DataManagerController(IDataService dataService, ILogger<DataManagerController> logger, IOptionsMonitor<PasswordOptionsMonitor> optionsMonitor)
     {
         _dataService = dataService;
         _logger = logger;
+        _optionsMonitor = optionsMonitor;
     }
 
     [HttpGet, Authorize]
@@ -102,9 +106,9 @@ public class DataManagerController : Controller
 
     [AllowAnonymous]
     [HttpPost]
-    public async Task<User> CreateUser( User user)
+    public async Task<User> CreateUser(User user)
     {
-
+        user.Password = PasswordHelper.HashPassword(user.Password, _optionsMonitor.CurrentValue.PasswordSalt);
         return await _dataService.CreateUserAccount(user);
     }
  
@@ -142,11 +146,12 @@ public class DataManagerController : Controller
     }
 
 
-    [HttpDelete, Authorize]
+    [HttpDelete("{contractId}"), Authorize]
 
-    public async Task<Contract> DeleteContract(int contractId)
+    public async Task<IActionResult> DeleteContract(int contractId)
     {
-        return await _dataService.DeleteContract(contractId);
+        await _dataService.DeleteContract(contractId);
+        return Ok();
     }
 
     [HttpPut("{contractId}"), Authorize]

@@ -7,7 +7,7 @@ namespace RealEstateManagementApp.Jobs;
 public class Worker : IWorker
 {
     private readonly ILogger<Worker> _logger;
-    //private readonly IDataService _dataService;
+    private readonly IDataService _dataService;
     private readonly IEmailSender _emailSender;
     private readonly IServiceScope _scope;
     public Worker(ILogger<Worker> logger, IEmailSender emailSender, IServiceProvider services)
@@ -16,6 +16,7 @@ public class Worker : IWorker
         //_dataService = dataService;
         _emailSender = emailSender;
         _scope = services.CreateScope();
+        _dataService = services.CreateScope().ServiceProvider.GetRequiredService<IDataService>();
     }
 
     public async Task DoWork(CancellationToken cancelToken)
@@ -27,23 +28,19 @@ public class Worker : IWorker
             {
                 if (DateTime.Now.Day == 1 && DateTime.Now.Hour == 12)
                 {
-                    using (var _dataService = _scope.ServiceProvider.GetRequiredService<IDataService>())
+                    var signedContracts = await _dataService.GetContractsForVerify();
+                    foreach (var contract in signedContracts)
                     {
-                        var signedContracts = await _dataService.GetContractsForVerify();
-                        foreach (var contract in signedContracts)
+
+                        List<Attachment> attachments = new List<Attachment>();
+                        foreach (var bill in contract.Bills)
                         {
-
-                            List<Attachment> attachments = new List<Attachment>();
-                            foreach (var bill in contract.Bills)
-                            {
-                                var pdfBytes = Convert.FromBase64String(bill?.BillPdf);
-                                var stream = new MemoryStream(pdfBytes);
-                                attachments.Add(new Attachment(stream, "Bill"));
-                            }
-                            await _emailSender.SendEmailTo(contract?.Tenant?.Email, "Reminder", "Body", attachments);
+                            var pdfBytes = Convert.FromBase64String(bill?.BillPdf);
+                            var stream = new MemoryStream(pdfBytes);
+                            attachments.Add(new Attachment(stream, "Bill" + bill.BillId.ToString() + ".pdf"));
                         }
+                        await _emailSender.SendEmailTo(contract?.Tenant?.Email, "Reminder chirie", "Contravaloare chirie: " + contract.Property.Value, attachments);
                     }
-
                     await Task.Delay(7200000);
                 }
                 else

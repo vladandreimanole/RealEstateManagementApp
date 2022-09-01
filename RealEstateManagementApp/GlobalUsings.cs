@@ -17,3 +17,4 @@ global using RealEstateManagementApp.Models;
 global using Microsoft.AspNetCore.SignalR;
 global using RealEstateManagementApp.Hubs;
 global using PassResetManager;
+global using RealEstateManagementApp.Helpers;

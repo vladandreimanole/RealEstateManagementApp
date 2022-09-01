@@ -39,5 +39,28 @@ public class ImageController : ControllerBase
         }
 
     }
+    [HttpPost("SavePdf/{contractId}")]
+    public async Task SavePdf(int contractId, IList<IFormFile> UploadFiles)
+    {
+        foreach (var file in UploadFiles)
+        {
+            if (file.Length > 0)
+            {
+                using (var ms = new MemoryStream())
+                {
+                    file.CopyTo(ms);
+                    var fileBytes = ms.ToArray();
+                    string base64Pdf = Convert.ToBase64String(fileBytes);
+                    Bill pdf = new()
+                    {
+                        ContractId = contractId,
+                        BillPdf = base64Pdf
+                    };
+                    await _dataService.TransferPdfToDatabase(pdf);
+                }
+            }
+        }
+
+    }
 
 }

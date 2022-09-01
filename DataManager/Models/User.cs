@@ -23,10 +23,10 @@ namespace DataManager.Models
         public string? PhoneNumber { get; set; }
         public string? PassResetToken { get; set; }
 
-        public virtual Role Role { get; set; } = null!;
-        public virtual ICollection<Chat> ChatLandlords { get; set; }
-        public virtual ICollection<Chat> ChatTenants { get; set; }
-        public virtual ICollection<Contract> Contracts { get; set; }
-        public virtual ICollection<Property> Properties { get; set; }
+        public virtual Role? Role { get; set; } = null!;
+        public virtual ICollection<Chat>? ChatLandlords { get; set; }
+        public virtual ICollection<Chat>? ChatTenants { get; set; }
+        public virtual ICollection<Contract>? Contracts { get; set; }
+        public virtual ICollection<Property>? Properties { get; set; }
     }
 }

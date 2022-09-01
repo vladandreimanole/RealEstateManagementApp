@@ -18,4 +18,8 @@ export class TenantRentalsComponent implements OnInit {
   openContractPage(contractId: number){
     this.router.navigate(["contract/" + contractId.toString()]);
   }
+  deleteContract(contractId: number){
+    this.dataService.deleteContract(contractId);
+    this.contracts = this.contracts.filter(contract => contract.contractId != contractId);
+  }
 }

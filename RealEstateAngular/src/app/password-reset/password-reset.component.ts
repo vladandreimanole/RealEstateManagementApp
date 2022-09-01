@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { User } from '../models/User';
 import { ResetPasswordService } from '../services/reset-password.service';
 
@@ -11,7 +12,7 @@ import { ResetPasswordService } from '../services/reset-password.service';
 })
 export class PasswordResetComponent implements OnInit {
 
-  constructor(private resetService: ResetPasswordService, private _snackBar: MatSnackBar) { }
+  constructor(private resetService: ResetPasswordService, private _snackBar: MatSnackBar, private router:Router) { }
   user:User = new User();
   isTokenSend:boolean=false;
   isTokenCorrect:boolean=false;
@@ -54,14 +55,15 @@ export class PasswordResetComponent implements OnInit {
   {
       this.resetService.verifyAndUpdatePass(this.user).subscribe(values=>{
         this.isTokenCorrect = true;
+        this.router.navigate(["login"]);
       });
     
-    if(this.isTokenCorrect == false){
-      this._snackBar.open('Incorrect token. Try again or send another token', 'Close', {
-        horizontalPosition: "right",
-        verticalPosition: "top",
-        duration: 3000
-    });
-    }
+    //if(this.isTokenCorrect == false){
+    //  this._snackBar.open('Incorrect token. Try again or send another token', 'Close', {
+     //   horizontalPosition: "right",
+     //   verticalPosition: "top",
+     //   duration: 3000
+   // });
+  //  }
   }
 }

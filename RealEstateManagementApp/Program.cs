@@ -1,5 +1,7 @@
 
 using EmailSender;
+using Microsoft.AspNetCore.Identity;
+using RealEstateManagementApp.Helpers;
 using RealEstateManagementApp.Jobs;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,6 +41,8 @@ builder.Services.AddTransient<IDataService, DataService>();
 builder.Services.AddTransient<IResetPasswordManager, ResetPasswordManager>();
 builder.Services.Configure<AuthentificationOptionsMonitor>(builder.Configuration.GetSection(nameof(AuthentificationOptionsMonitor)));
 builder.Services.Configure<EmailOptionsMonitor>(builder.Configuration.GetSection(nameof(EmailOptionsMonitor)));
+builder.Services.Configure<PasswordOptionsMonitor>(builder.Configuration.GetSection(nameof(PasswordOptionsMonitor)));
+//builder.Services.AddTransient<IPasswordHasher<User>, PasswordHasher>();
 builder.Services.AddSignalR();
 builder.Services.AddHostedService<RentReminderJob>();
 
